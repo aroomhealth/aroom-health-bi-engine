@@ -1,0 +1,23 @@
+table_name,field_name,data_type,null_pct,distinct_count,min_val,max_val,is_pk,is_fk,pii_level,dq_issues
+database_aroom_health.pedidos_vendas,identificador,INT64,0.0,127511,21364272133,22449815487,TRUE,FALSE,Low,2 duplicates
+database_aroom_health.pedidos_vendas,data,DATE,0.0,1776,2021-08-05,2026-06-15,FALSE,FALSE,Low,None
+database_aroom_health.pedidos_vendas,total,FLOAT64,0.0,19345,0.0,8077.5,FALSE,FALSE,Low,82 values are zero
+database_aroom_health.pedidos_vendas,contato_id,INT64,0.0,109514,101010,198293,FALSE,TRUE,Medium,Join to customer profile
+database_aroom_health.pedidos_vendas,observacoes_internas,STRING,93.4,NULL,NULL,NULL,FALSE,FALSE,Low,93.4% empty
+database_aroom_health.pedidos_vendas_itens,identificador,INT64,0.0,182795,17406369135,18279546484,TRUE,FALSE,Low,895 duplicates
+database_aroom_health.pedidos_vendas_itens,codigo,STRING,4.2,2299,NULL,NULL,FALSE,FALSE,Low,7841 values empty
+database_aroom_health.pedidos_vendas_itens,quantidade,INT64,0.0,45,-2,100,FALSE,FALSE,Low,67 values <= 0
+database_aroom_health.pedidos_vendas_itens,valor,NUMERIC,0.0,2564,-10.0,1200.0,FALSE,FALSE,Low,4960 values <= 0
+database_aroom_health.pedidos_vendas_itens,comissao_valor,NUMERIC,0.0,1,0.0,0.0,FALSE,FALSE,Low,100% zerado
+database_aroom_health.produtos,identificador,INT64,0.0,9747,101010,184564,TRUE,FALSE,Low,2 duplicates
+database_aroom_health.produtos,codigo,STRING,51.7,2354,NULL,NULL,FALSE,FALSE,Low,5042 missing code
+database_aroom_health.produtos,preco_custo,FLOAT64,0.0,453,0.0,450.0,FALSE,FALSE,Medium,91.1% zero costs (8883 zero)
+database_aroom_health.produtos,estoque,INT64,0.3,874,-50,10000,FALSE,FALSE,Low,1684 negative stocks
+database_aroom_health.google_ads_campaign_performance,day,DATE,0.0,582,2024-05-09,2025-12-12,FALSE,FALSE,Low,Stale since 12/12/2025
+database_aroom_health.google_ads_campaign_performance,cost_spend,FLOAT64,0.0,2112,0.0,4870.0,FALSE,FALSE,Low,None
+customer_intelligence.growth_engine_vendas_detalhado,custo_total_produto,FLOAT64,0.0,2112,0.0,2300.0,FALSE,FALSE,Medium,59% zero (108442 rows)
+customer_intelligence.customer_profile_enriched,cep,STRING,0.01,87654,NULL,NULL,FALSE,FALSE,Medium,18 null values
+customer_intelligence.customer_profile_enriched,renda_media_setor,FLOAT64,0.0,24321,1100.0,35000.0,FALSE,FALSE,Low,None
+customer_intelligence.customer_profile_enriched,distancia_cd_km,FLOAT64,0.0,34212,0.1,4200.0,FALSE,FALSE,Low,None
+customer_intelligence.customer_predictions,probabilidade_churn_30d,FLOAT64,0.0,54321,0.0,1.0,FALSE,FALSE,Low,None
+customer_intelligence.customer_predictions,predicao_ltv_12meses,FLOAT64,0.0,21121,0.0,4500.0,FALSE,FALSE,Low,None

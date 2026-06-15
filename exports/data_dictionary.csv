@@ -1,0 +1,34 @@
+table_name,field_name,data_type,business_category,business_meaning,is_pk,is_fk,pii_level,risk_level
+database_aroom_health.pedidos_vendas,identificador,INT64,Order,Bling internal unique order ID,TRUE,FALSE,Low,Low
+database_aroom_health.pedidos_vendas,data,DATE,Time,Order creation date,FALSE,FALSE,Low,Low
+database_aroom_health.pedidos_vendas,total,FLOAT64,Revenue,Order total net value,FALSE,FALSE,Low,Low
+database_aroom_health.pedidos_vendas,total_produtos,FLOAT64,Revenue,Total gross value of products in order,FALSE,FALSE,Low,Low
+database_aroom_health.pedidos_vendas,contato_id,INT64,Customer,Foreign key connecting to contact customer,FALSE,TRUE,Medium,Low
+database_aroom_health.pedidos_vendas,loja_id,INT64,Order,Store/channel origin code,FALSE,TRUE,Low,Low
+database_aroom_health.pedidos_vendas,observacoes_internas,STRING,Marketing,Internal checkout notes containing UTMs,FALSE,FALSE,Low,Medium
+database_aroom_health.pedidos_vendas_itens,identificador,INT64,Order,Unique item row ID,TRUE,FALSE,Low,Medium
+database_aroom_health.pedidos_vendas_itens,pedidos_vendas_identificador,INT64,Order,Foreign key linking item to sale header,FALSE,TRUE,Low,Low
+database_aroom_health.pedidos_vendas_itens,codigo,STRING,Product,SKU code representing product variation,FALSE,FALSE,Low,Medium
+database_aroom_health.pedidos_vendas_itens,quantidade,INT64,Product,Quantity of items sold,FALSE,FALSE,Low,Low
+database_aroom_health.pedidos_vendas_itens,valor,NUMERIC,Revenue,Unit net selling price,FALSE,FALSE,Low,Medium
+database_aroom_health.pedidos_vendas_itens,desconto,NUMERIC,Revenue,Item discount value,FALSE,FALSE,Low,Low
+database_aroom_health.pedidos_vendas_itens,comissao_valor,NUMERIC,Cost,Marketplace/channel commission paid,FALSE,FALSE,Low,High
+database_aroom_health.pedidos_vendas_itens,produto_id,INT64,Product,Foreign key linking to product catalog,FALSE,TRUE,Low,Low
+database_aroom_health.produtos,identificador,INT64,Product,Catalog product unique ID,TRUE,FALSE,Low,Low
+database_aroom_health.produtos,nome,STRING,Product,Descriptive name of product variation,FALSE,FALSE,Low,Low
+database_aroom_health.produtos,codigo,STRING,Product,Product variation SKU code,FALSE,FALSE,Low,High
+database_aroom_health.produtos,preco,FLOAT64,Revenue,Target sale price in catalog,FALSE,FALSE,Low,Low
+database_aroom_health.produtos,preco_custo,FLOAT64,Cost,Manufacturing cost price (for COGS),FALSE,FALSE,Medium,High
+database_aroom_health.produtos,estoque,INT64,Logistics,Current physical inventory balance,FALSE,FALSE,Low,Medium
+database_aroom_health.google_ads_campaign_performance,campaign_name,STRING,Marketing,Unique campaign name in Google Ads,FALSE,FALSE,Low,Low
+database_aroom_health.google_ads_campaign_performance,day,DATE,Time,Date of performance metrics,FALSE,FALSE,Low,High
+database_aroom_health.google_ads_campaign_performance,cost_spend,FLOAT64,Cost,Ad spending value (spend),FALSE,FALSE,Low,Low
+customer_intelligence.growth_engine_vendas_detalhado,custo_total_produto,FLOAT64,Cost,Calculated cost total for items sold,FALSE,FALSE,Medium,High
+customer_intelligence.customer_profile_enriched,customer_id,STRING,Customer,Primary customer unique key,TRUE,FALSE,Medium,Low
+customer_intelligence.customer_profile_enriched,cep,STRING,Geography,Postal code CEP of client,FALSE,FALSE,Medium,Low
+customer_intelligence.customer_profile_enriched,renda_media_setor,FLOAT64,Geography,Average income censitary sector (IBGE),FALSE,FALSE,Low,Low
+customer_intelligence.customer_profile_enriched,distancia_cd_km,FLOAT64,Logistics,Linear distance from client CEP to CD,FALSE,FALSE,Low,Low
+customer_intelligence.customer_predictions,probabilidade_churn_30d,FLOAT64,Customer,Churn probability for next 30 days,FALSE,FALSE,Low,Low
+customer_intelligence.customer_predictions,predicao_ltv_12meses,FLOAT64,Customer,Predicted customer value in 12 months,FALSE,FALSE,Low,Low
+customer_intelligence.customer_predictions,propensao_recompra_score,FLOAT64,Customer,Score of buying propensity,FALSE,FALSE,Low,Low
+customer_intelligence.customer_rfm,rfm_segment,STRING,Customer,Customer loyalty segment (RFM),FALSE,FALSE,Low,Low

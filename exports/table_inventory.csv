@@ -1,0 +1,11 @@
+table_name,object_type,row_count,date_min,date_max,risks
+database_aroom_health.pedidos_vendas,table,127513,2021-08-05,2026-06-15,2 order-level duplicates
+database_aroom_health.pedidos_vendas_itens,table,183690,NULL,NULL,895 duplicate items; 7841 missing codes
+database_aroom_health.produtos,table,9749,NULL,NULL,91.1% costs missing (8883 zero); 5042 missing codes
+database_aroom_health.pedidos_vendas_transporte,table,127513,NULL,NULL,Needs pro-rata rateo
+database_aroom_health.google_ads_campaign_performance,table,3418,2024-05-09,2025-12-12,Stale data since 12/12/2025
+database_aroom_health.google_analytics_utm_daily,table,20969,2025-01-01,2026-06-15,No direct transactional link
+customer_intelligence.growth_engine_vendas_detalhado,view,183692,2021-08-05,2026-06-15,59% COGS zerado (108442 rows)
+customer_intelligence.customer_profile_enriched,table,119873,NULL,NULL,18 null CEPs
+customer_intelligence.customer_predictions,table,101593,NULL,NULL,None
+customer_intelligence.customer_rfm,table,101593,NULL,NULL,None
