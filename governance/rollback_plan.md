@@ -21,7 +21,7 @@ O processo de rollback deve ser executado imediatamente caso ocorra:
 
 ### Passo 2: Executar o Código de Backup
 * No console do BigQuery, execute o script contido em:
-  [deployment/rollback.sql](file:///Users/renanstranodeoliveira/Downloads/11_DATALAKE/aroom-health-bi-engine/deployment/rollback.sql)
+  [deployment/rollback.sql](file:///Users/renanstranodeoliveira/Downloads/aroom-health-bi-engine/deployment/rollback.sql)
 * Este script recria a view `growth_engine_vendas_detalhado` exatamente na versão estável anterior.
 
 ### Passo 3: Executar a Suite de Testes
