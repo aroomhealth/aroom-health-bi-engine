@@ -69,6 +69,8 @@ A análise quantitativa cobriu o catálogo completo de produtos (`produtos`) e a
     *   **Inativos (I):** 1.793 produtos (791 sem SKU, 790 SKUs únicos)
     *   **Excluídos/Deletados (E):** 6.228 produtos (4.017 sem SKU, 1.233 SKUs únicos)
 
+![Funil de Cobertura de SKUs no Catálogo](sku_coverage_funnel.png)
+
 > [!WARNING]
 > A presença de 6.228 produtos com status "Excluído" (`E`) no cadastro do BigQuery indica que a replicação do Bling ERP realiza exclusões lógicas, mas mantém a massa de dados inativa no data lake. Além disso, 51,7% dos registros sem SKU quebram joins operacionais que usam o campo `codigo`.
 
@@ -90,6 +92,8 @@ A análise quantitativa cobriu o catálogo completo de produtos (`produtos`) e a
 | **5. Coloração Natural** | 1 | R$ 7.775,10 | 0,16% | ⚠️ Revisar (Sub-representado) |
 | **3. Estética e Beleza** | 1 | R$ 1,52 | 0,00% | ⚠️ Revisar |
 | **Total Geral** | **1.886** | **R$ 4.781.727,81** | **100,00%** | |
+
+![Funil de Integridade da Receita de Vendas](revenue_integrity_funnel.png)
 
 ---
 
