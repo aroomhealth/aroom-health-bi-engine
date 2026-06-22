@@ -123,12 +123,15 @@ base_limpa AS (
         CASE
             WHEN (cat.categoria_produto IS NULL OR cat.categoria_produto = 'Outros' OR cat.categoria_produto = '') THEN
                 CASE
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%óleo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%oleo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%leo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%semente de uva%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%rícino%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%ricino%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%jojoba%' THEN 'Óleos Vegetais'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%tintura%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%maca peruana%' THEN 'Tintura Mãe'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%blend%' THEN 'Blends Fórmulas Exclusivas'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%kit%' THEN 'Kits De Óleos Vegetais'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%óleo essencial%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%oleo essencial%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%leo essencial%' THEN 'Óleos Essenciais'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%argila%' THEN 'Argila'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'vegeta|semente de uva|rícino|ricino|r.cino|jojoba|rosa mosqueta') THEN 'Óleos Vegetais'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'tintura|maca peruana|cardo mariano|espinheira|valeriana|algodoeiro|damiana') THEN 'Tintura Mãe'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'blend') THEN 'Blends Fórmulas Exclusivas'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'kit') THEN 'Kits De Óleos Vegetais'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'essencial|olíbano|olibano') THEN 'Óleos Essenciais'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'argila') THEN 'Argila'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'tônico|tonico|t.nico') THEN 'Tônicos Capilares'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'aloe vera') THEN 'Gel Aloe Vera'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'sérum|serum|rejuvenescedor|creme|ozonizado') THEN 'Estética e Beleza'
                     ELSE COALESCE(cat.categoria_produto, 'Sem Categoria')
                 END
             ELSE cat.categoria_produto
@@ -137,12 +140,15 @@ base_limpa AS (
         CASE
             WHEN (cat.subcategoria_produto IS NULL OR cat.subcategoria_produto = 'Outros' OR cat.subcategoria_produto = '') THEN
                 CASE
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%óleo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%oleo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%leo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%semente de uva%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%rícino%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%ricino%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%jojoba%' THEN 'Óleos Vegetais'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%tintura%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%maca peruana%' THEN 'Tintura Mãe'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%blend%' THEN 'Blends Fórmulas Exclusivas'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%kit%' THEN 'Kits De Óleos Vegetais'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%óleo essencial%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%oleo essencial%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%leo essencial%' THEN 'Óleos Essenciais'
-                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%argila%' THEN 'Argila'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'vegeta|semente de uva|rícino|ricino|r.cino|jojoba|rosa mosqueta') THEN 'Óleos Vegetais'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'tintura|maca peruana|cardo mariano|espinheira|valeriana|algodoeiro|damiana') THEN 'Tintura Mãe'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'blend') THEN 'Blends Fórmulas Exclusivas'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'kit') THEN 'Kits De Óleos Vegetais'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'essencial|olíbano|olibano') THEN 'Óleos Essenciais'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'argila') THEN 'Argila'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'tônico|tonico|t.nico') THEN 'Tônicos Capilares'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'aloe vera') THEN 'Gel Aloe Vera'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'sérum|serum|rejuvenescedor|creme|ozonizado') THEN 'Estética e Beleza'
                     ELSE COALESCE(cat.subcategoria_produto, 'Sem Categoria')
                 END
             ELSE cat.subcategoria_produto
