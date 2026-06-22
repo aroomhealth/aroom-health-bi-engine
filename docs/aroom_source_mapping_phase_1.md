@@ -1,5 +1,7 @@
 # Aroom Health — Source Mapping Phase 1
-**Data:** 22/06/2026 | **Projeto:** iron-rex-461220-g4 | **Modo:** READ ONLY
+**Data:** 22/06/2026 | **Atualizado:** 22/06/2026 (v1.1) | **Projeto:** iron-rex-461220-g4 | **Modo:** READ ONLY
+
+> **v1.1:** Adicionada Seção 5.1 — Tabelas de Frontend com capacidade de bridge para Backend e Bling.
 
 ---
 
@@ -201,6 +203,107 @@ O ambiente GCP da Aroom Health possui **11 datasets**, **~100 tabelas** e **~20 
 | Bling Pedido → NF | `pedidos_vendas.nota_fiscal_id` | `notas_fiscais_saida.identificador` | `nota_fiscal_id = identificador` | ALTA | 73.286 NFs vs 130.135 pedidos — cobertura parcial |
 | Bling Pedido → Cliente | `pedidos_vendas.contato_id` | `contato.identificador` | `contato_id = identificador` | ALTA | 120.479 clientes |
 | Bling Item → Produto | `pedidos_vendas_itens.produto_id` | `produtos.identificador` | `produto_id = identificador` | ALTA | 9.751 produtos |
+
+---
+
+## 5.1 Tabelas Frontend com Bridge para Backend / Bling
+
+Além do GA4, existem **7 tabelas adicionais no `database_aroom_health`** com capacidade de conectar o comportamento digital ao backend ou ao ERP. Classificadas abaixo:
+
+### Grupo A — GA4 Pré-Agregado (Frontend → Bling via Receita)
+
+Essas tabelas são réplicas agregadas do GA4, ingeridas via pipeline próprio (não DTS). Contêm receita e evento, mas **sem `transactionId`** — não permitem join pedido a pedido com o Bling. Bridge é por **data + canal**.
+
+| Tabela | Linhas | Período | Receita | Grain | Bridge possível |
+|:---|---:|:---|---:|:---|:---|
+| `google_analytics_daily` | 538 | Jan/2025–Jun/2026 | R$ 1.682.913 | Dia | JOIN por `metric_date` |
+| `google_analytics_revenue_channel_daily` | 3.292 | Jan/2025–Jun/2026 | R$ 1.682.913 | Dia × Canal | JOIN por `metric_date + channel_group` |
+| `google_analytics_utm_daily` | 21.266 | Jan/2025–Jun/2026 | — | Dia × Campanha × Fonte | JOIN com Google Ads por `session_campaign_name` |
+| `google_analytics_event_daily` | 8.444 | Jan/2025–Jun/2026 | — | Dia × Evento | Funil de comportamento |
+
+**Descoberta crítica:** `google_analytics_daily` acumula **R$ 1.682.913** e **16.236 transações** (Jan/2025–Jun/2026) — valor **3,3× maior** que o GA4 Recovery (R$ 512k / 4.955 transações). Isso indica que o pipeline de ingestão diária captura mais dados que a API de recuperação histórica, pois cobre o período antes do gap (Jan–Dez/2025).
+
+**Receita GA4 por canal** (`google_analytics_revenue_channel_daily`):
+
+| Canal | Receita | Transações |
+|:---|---:|---:|
+| Cross-network (PMax) | R$ 757.127 | 7.050 |
+| Paid Social (Meta) | R$ 254.700 | 2.986 |
+| Direct | R$ 225.410 | 2.138 |
+| Organic Search | R$ 128.221 | 1.025 |
+| Referral | R$ 108.847 | 923 |
+| Paid Search | R$ 65.045 | 502 |
+
+**Top campanhas GA4 UTM** (`google_analytics_utm_daily` — bridge com Google Ads):
+
+| Campanha | Fonte | Sessões |
+|:---|:---|---:|
+| pmax_roas_formula-exclusiva | google / cpc | 124.264 |
+| (direct) | — | 75.963 |
+| pmax_roas_todos-sudeste | google / cpc | 70.240 |
+| 120209681087360703 (Meta) | ig / paid | 51.267 |
+| pmax_roas_maca-peruana | google / cpc | 23.275 |
+
+> **Bridge Confirmada:** `google_analytics_utm_daily.session_campaign_name` faz JOIN com `marketing_attribution.campaign_name_mapping.utm_campaign` para ligar campanha → custo Google Ads. Cobertura histórica: Jan/2025–Jun/2026 (muito superior ao GA4 Recovery).
+
+---
+
+### Grupo B — Email Marketing / CRM (Frontend → Bling via Email)
+
+Essas tabelas conectam ações de e-mail marketing ao cliente Bling via `contact_email`.
+
+| Tabela | Linhas | Período | Chave de Bridge | Bridge para Bling |
+|:---|---:|:---|:---|:---|
+| `perfit_campaign_actions` | 297.434 | Mar/2026–Jun/2026 | `contact_email` | 75% match com `contato.email` (4.994 de 6.656 emails únicos) |
+| `perfit_campaign_metrics` | 758 | Jun/2026 | `campaign_id` | Métricas agregadas de campanha (open rate, CTR) |
+| `dispatch_send_log` | 22.376 | Abr/2026–Jun/2026 | `contact_id` (Bling) | **Bridge DIRETA** via `contact_id` → `contato.identificador` |
+
+**Descoberta:** `perfit_campaign_actions` contém 297.434 eventos de 6.656 emails únicos. **75% (4.994 emails)** existem na base de clientes do Bling — ou seja, é possível rastrear qual cliente Bling interagiu com qual campanha de email, cruzar com histórico de compra (RFM) e calcular conversão de email em pedido.
+
+**`dispatch_send_log`** usa `contact_id` (FK direta para `contato.identificador`) — é a tabela com a **bridge mais direta** entre comunicação digital e ERP.
+
+---
+
+### Grupo C — Chatbot (Frontend → Backend/Bling via Email, baixa cobertura)
+
+| Tabela | Linhas | Período | Chave | Bridge |
+|:---|---:|:---|:---|:---|
+| `chatbot_session` | 503 | Mar/2026–Jun/2026 | `email`, `phone` | 133 emails únicos; 26 (19,5%) match com `checkout.contact_email` |
+| `chatbot_message` | 1.660 | Mar/2026–Jun/2026 | `chat_session_id` | Conteúdo das mensagens — potencial CX |
+
+**Limitação:** Volume baixo (503 sessões) e cobertura de 19,5% com o checkout. Útil para análise de CX, mas não é bridge financeira confiável.
+
+---
+
+### Mapa completo de bridges Frontend → Backend → Bling
+
+```
+FRONTEND                              BACKEND               BLING ERP
+─────────────────────────────────────────────────────────────────────
+
+ga4_recovery_ecommerce               nuvemshop_pedidos     pedidos_vendas
+  transactionId ─────────────────────────────────────────→ numero (20.5% cobertura)
+
+google_analytics_daily               —                     pedidos_vendas
+  metric_date + purchase_revenue ──────────────────────→   SUM(total) por data (canal)
+  [bridge por agregado, sem join pedido a pedido]
+
+google_analytics_utm_daily           —                     google_ads
+  session_campaign_name ────────────────────────────────→  campaign_name_mapping
+  [bridge: UTM → custo de campanha]
+
+google_analytics_revenue_channel_daily  —                  —
+  session_default_channel_group ───────────────────────→   Atribuição por canal (agregado)
+
+perfit_campaign_actions              —                     contato
+  contact_email ────────────────────────────────────────→  email (75% match, 4.994 clientes)
+
+dispatch_send_log                    —                     contato
+  contact_id ───────────────────────────────────────────→  identificador (JOIN DIRETO)
+
+chatbot_session                      checkout              —
+  email ────────────────────────────────────────────────→  contact_email (19.5% cobertura)
+```
 
 ---
 
