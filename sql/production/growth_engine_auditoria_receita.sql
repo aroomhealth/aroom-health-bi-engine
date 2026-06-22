@@ -48,6 +48,7 @@ new_sales AS (
 SELECT 
     COALESCE(n.data_venda, o.data_venda) as data_venda,
     COALESCE(n.canal, o.canal) as canal,
+    COALESCE(n.canal, o.canal) as origem_agrupada,
     COALESCE(n.produto, o.produto) as produto,
     
     n.familia_produto,

@@ -20,7 +20,8 @@ WITH old_sales AS (
             ELSE 'Outros' 
         END as canal,
         nome_produto as produto,
-        SUM(valor_final_calculado) as receita_antiga,
+        SUM(valor) as receita_bruta_antiga,
+        SUM(valor_final_calculado) as receita_liquida_antiga,
         SUM(quantidade) as qtd_antiga
     FROM `iron-rex-461220-g4.database_aroom_health.view_vendas`
     WHERE situacao_id NOT IN (12, 105)
@@ -31,6 +32,14 @@ new_sales AS (
         data_venda,
         origem_agrupada as canal,
         produto,
+        ANY_VALUE(familia_produto) as familia_produto,
+        ANY_VALUE(objetivo_produto) as objetivo_produto,
+        ANY_VALUE(etapa_jornada_produto) as etapa_jornada_produto,
+        ANY_VALUE(nivel_especializacao) as nivel_especializacao,
+        ANY_VALUE(faixa_valor_produto) as faixa_valor_produto,
+        ANY_VALUE(potencial_recorrencia) as potencial_recorrencia,
+        ANY_VALUE(categoria_produto) as categoria_produto,
+        ANY_VALUE(subcategoria_produto) as subcategoria_produto,
         SUM(receita_liquida) as receita_liquida_nova,
         SUM(receita_bruta) as receita_bruta_nova,
         SUM(quantidade_comprada) as qtd_nova
@@ -40,18 +49,30 @@ new_sales AS (
 SELECT 
     COALESCE(n.data_venda, o.data_venda) as data_venda,
     COALESCE(n.canal, o.canal) as canal,
+    COALESCE(n.canal, o.canal) as origem_agrupada,
     COALESCE(n.produto, o.produto) as produto,
+    
+    n.familia_produto,
+    n.objetivo_produto,
+    n.etapa_jornada_produto,
+    n.nivel_especializacao,
+    n.faixa_valor_produto,
+    n.potencial_recorrencia,
+    n.categoria_produto,
+    n.subcategoria_produto,
     
     IFNULL(n.qtd_nova, 0) as qtd_nova,
     IFNULL(o.qtd_antiga, 0) as qtd_antiga,
     
+    IFNULL(o.receita_bruta_antiga, 0) as receita_bruta,
     IFNULL(n.receita_bruta_nova, 0) as receita_bruta_nova,
+    
+    IFNULL(o.receita_liquida_antiga, 0) as receita_liquida,
     IFNULL(n.receita_liquida_nova, 0) as receita_liquida_nova,
-    IFNULL(o.receita_antiga, 0) as receita_antiga,
     
     -- Cálculos de Diferença (Deltas)
-    (IFNULL(n.receita_bruta_nova, 0) - IFNULL(o.receita_antiga, 0)) as diferenca_bruta,
-    (IFNULL(n.receita_liquida_nova, 0) - IFNULL(o.receita_antiga, 0)) as diferenca_liquida
+    (IFNULL(n.receita_bruta_nova, 0) - IFNULL(o.receita_bruta_antiga, 0)) as diferenca_bruta,
+    (IFNULL(n.receita_liquida_nova, 0) - IFNULL(o.receita_liquida_antiga, 0)) as diferenca_liquida
 FROM new_sales n
 FULL OUTER JOIN old_sales o 
     ON n.data_venda = o.data_venda 
