@@ -1,61 +1,207 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2200" pageHeight="1700" math="0" shadow="0" background="#0d1117">
-  <root>
-    <mxCell id="0"/>
-    <mxCell id="1" parent="0"/>
-<mxCell id="11" value="🎯  LAYER 0 — AQUISICAO (Paid Media)" style="swimlane;startSize=32;fontStyle=1;fontSize=13;strokeColor=#f59e0b;fillColor=#78350f;fontColor=#ffffff;strokeWidth=2;rounded=1;" parent="1" vertex="1"><mxGeometry x="20" y="20" width="1560" height="180" as="geometry"/></mxCell>
-<mxCell id="12" value="🌐  LAYER 1 — FRONTEND (GA4 + Email CRM)" style="swimlane;startSize=32;fontStyle=1;fontSize=13;strokeColor=#3b82f6;fillColor=#1e3a8a;fontColor=#ffffff;strokeWidth=2;rounded=1;" parent="1" vertex="1"><mxGeometry x="20" y="220" width="1560" height="360" as="geometry"/></mxCell>
-<mxCell id="13" value="🛒  LAYER 2 — BACKEND / E-COMMERCE (Nuvemshop + Checkout)" style="swimlane;startSize=32;fontStyle=1;fontSize=13;strokeColor=#14b8a6;fillColor=#134e4a;fontColor=#ffffff;strokeWidth=2;rounded=1;" parent="1" vertex="1"><mxGeometry x="20" y="600" width="1560" height="320" as="geometry"/></mxCell>
-<mxCell id="14" value="🏦  LAYER 3 — BLING ERP (Fonte de Verdade | R$ 9.538.019)" style="swimlane;startSize=32;fontStyle=1;fontSize=13;strokeColor=#22c55e;fillColor=#14532d;fontColor=#ffffff;strokeWidth=2;rounded=1;" parent="1" vertex="1"><mxGeometry x="20" y="940" width="1560" height="420" as="geometry"/></mxCell>
-<mxCell id="15" value="🧠  LAYER 4 — CUSTOMER INTELLIGENCE + CRM" style="swimlane;startSize=32;fontStyle=1;fontSize=13;strokeColor=#a855f7;fillColor=#3b0764;fontColor=#ffffff;strokeWidth=2;rounded=1;" parent="1" vertex="1"><mxGeometry x="20" y="1380" width="1560" height="300" as="geometry"/></mxCell>
-<mxCell id="16" value="GOOGLE ADS&#xa;[PK] campaign_id STRING&#xa;campaign_name STRING&#xa;cost_micros INT64&#xa;impressions INT64 / clicks INT64&#xa;─────────────────&#xa;Outbound: utm_campaign → GA4&#xa;Badge: pmax_roas_formula-exclusiva" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#92400e;strokeColor=#f59e0b;fontColor=#ffffff;strokeWidth=1.5;" parent="11" vertex="1"><mxGeometry x="80" y="50" width="310" height="120" as="geometry"/></mxCell>
-<mxCell id="17" value="META / INSTAGRAM ADS&#xa;[PK] campaign_id STRING (numerico)&#xa;spend NUMERIC / impressions INT64&#xa;date_start DATE&#xa;─────────────────&#xa;Outbound: utm_source=ig → GA4&#xa;Campanha: 120209681087360703" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#1e3a8a;strokeColor=#3b82f6;fontColor=#ffffff;strokeWidth=1.5;" parent="11" vertex="1"><mxGeometry x="450" y="50" width="310" height="120" as="geometry"/></mxCell>
-<mxCell id="18" value="SHOPEE / ML / TIKTOK&#xa;canal STRING (sem UTM tracking)&#xa;spend por canal&#xa;─────────────────&#xa;⚠️ SEM rastreio GA4&#xa;Chega direto no Bling via integracao" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#374151;strokeColor=#6b7280;fontColor=#ffffff;strokeWidth=1.5;" parent="11" vertex="1"><mxGeometry x="820" y="50" width="310" height="120" as="geometry"/></mxCell>
-<mxCell id="19" value="GA4 events_YYYYMMDD&#xa;[PK] user_pseudo_id STRING (cookie)&#xa;event_name STRING&#xa;event_date STRING (particao)&#xa;traffic_source.source STRING 99.7%&#xa;traffic_source.medium STRING 99.7%&#xa;traffic_source.name STRING (campaign)&#xa;[FK→Bling] event_params[transaction_id] ⚠️&#xa;device.category STRING&#xa;geo.country / region / city STRING&#xa;─────────────────&#xa;185.602 eventos | 18 dias | Nov/25–Jun/26&#xa;266 purchase | 17.881 sessions" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#1e40af;strokeColor=#3b82f6;fontColor=#ffffff;strokeWidth=1.5;" parent="12" vertex="1"><mxGeometry x="80" y="50" width="310" height="250" as="geometry"/></mxCell>
-<mxCell id="20" value="FUNIL GA4&#xa;session_start: 17.881&#xa;view_item: 3.673&#xa;add_to_cart: 3.673&#xa;begin_checkout: 431&#xa;PURCHASE: 266&#xa;─────────────────&#xa;⚠️ transaction_id NULL em 79.5%" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#166534;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;" parent="12" vertex="1"><mxGeometry x="450" y="50" width="230" height="220" as="geometry"/></mxCell>
-<mxCell id="21" value="ga4_recovery_ecommerce&#xa;[PK] transactionId STRING&#xa;session_source STRING&#xa;session_medium STRING&#xa;purchase_revenue NUMERIC&#xa;─────────────────&#xa;4.955 transacoes | R$ 512.023&#xa;[FK→Bling] transactionId=numero" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#065f46;strokeColor=#10b981;fontColor=#ffffff;strokeWidth=1.5;" parent="12" vertex="1"><mxGeometry x="740" y="50" width="240" height="190" as="geometry"/></mxCell>
-<mxCell id="22" value="ga4_utm_daily&#xa;[PK] metric_date DATE&#xa;session_campaign_name STRING&#xa;session_source STRING&#xa;session_medium STRING&#xa;purchases INT64&#xa;purchase_revenue NUMERIC&#xa;─────────────────&#xa;21.266 linhas | Jan/25–Jun/26" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#134e4a;strokeColor=#0d9488;fontColor=#ffffff;strokeWidth=1.5;" parent="12" vertex="1"><mxGeometry x="80" y="270" width="230" height="160" as="geometry"/></mxCell>
-<mxCell id="23" value="ga4_revenue_channel_daily&#xa;[PK] metric_date DATE&#xa;channel_group STRING&#xa;purchase_revenue NUMERIC&#xa;ROAS NUMERIC&#xa;─────────────────&#xa;R$ 1.68M | por canal&#xa;8.444 linhas" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#134e4a;strokeColor=#0d9488;fontColor=#ffffff;strokeWidth=1.5;" parent="12" vertex="1"><mxGeometry x="350" y="270" width="230" height="160" as="geometry"/></mxCell>
-<mxCell id="24" value="perfit_campaign_actions&#xa;[PK] id INT64&#xa;[FK] campaign_id INT64&#xa;action_type STRING ENUM&#xa;  SENT 56.9% / OPEN 40.7%&#xa;  CLICK 1.9% / BOUNCE 0.1%&#xa;[FK→Bling] contact_email STRING 100%&#xa;action_at DATETIME&#xa;─────────────────&#xa;297.434 eventos | 6.656 emails unicos" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#4c1d95;strokeColor=#7c3aed;fontColor=#ffffff;strokeWidth=1.5;" parent="12" vertex="1"><mxGeometry x="1000" y="50" width="270" height="220" as="geometry"/></mxCell>
-<mxCell id="25" value="dispatch_send_log&#xa;[PK] id INT64&#xa;[FK→Bling] contact_id INT64 100%&#xa;rule_tag STRING ENUM&#xa;  aniversario&#xa;  sinto_sua_falta&#xa;  produto_acabando_cliente&#xa;  sinto_sua_falta_2&#xa;anchor_date DATE | sent_at DATETIME&#xa;─────────────────&#xa;22.376 envios | 15.941 clientes | 4 regras" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#4c1d95;strokeColor=#7c3aed;fontColor=#ffffff;strokeWidth=1.5;" parent="12" vertex="1"><mxGeometry x="1300" y="50" width="240" height="220" as="geometry"/></mxCell>
-<mxCell id="26" value="checkout&#xa;[PK] token STRING 100% (ID unico carrinho)&#xa;contact_email STRING 100% ← bridge&#xa;contact_identification STRING 100% (CPF)&#xa;store_id INT64 100% = 2537710&#xa;shipping_zipcode STRING 100%&#xa;created_at DATETIME&#xa;─────────────────&#xa;2.568 carrinhos | 2.294 emails unicos&#xa;⚠️ 87.5% NAO converte em pedido" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#0f3b3b;strokeColor=#14b8a6;fontColor=#ffffff;strokeWidth=1.5;" parent="13" vertex="1"><mxGeometry x="80" y="50" width="300" height="220" as="geometry"/></mxCell>
-<mxCell id="27" value="nuvemshop_pedidos&#xa;[PK] token STRING 100% (ID pedido)&#xa;customer_id INT64 100% ← ID Nuvemshop&#xa;contact_email STRING 100% ← bridge&#xa;contact_identification STRING 100% (CPF)&#xa;store_id INT64 100% = 2537710 ← bridge&#xa;payment_status STRING paid=93.6%&#xa;fulfillment_status STRING ⚠️ 0% VAZIO&#xa;shipping_address RECORD&#xa;─────────────────&#xa;19.915 pedidos | 16.882 clientes | Jan/25–Jun/26" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#0f3b3b;strokeColor=#14b8a6;fontColor=#ffffff;strokeWidth=1.5;" parent="13" vertex="1"><mxGeometry x="450" y="50" width="320" height="250" as="geometry"/></mxCell>
-<mxCell id="28" value="nuvemshop_pedido_produto&#xa;[PK] id INT64&#xa;[FK] pedido_id INT64 → nuvemshop_pedidos&#xa;sku STRING ← bridge catalogo&#xa;name STRING&#xa;quantity INT64&#xa;price NUMERIC&#xa;─────────────────&#xa;48.690 itens" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#0f3b3b;strokeColor=#14b8a6;fontColor=#ffffff;strokeWidth=1.5;" parent="13" vertex="1"><mxGeometry x="850" y="50" width="260" height="190" as="geometry"/></mxCell>
-<mxCell id="29" value="pedidos_vendas  ★ FONTE DE VERDADE&#xa;[PK] identificador INT64 100%&#xa;[UK] numero INT64 100% ← transactionId GA4&#xa;[FK] loja_id INT64 100% ← canais_venda&#xa;[FK] contato_id INT64 100% ⚠️ SCHEMA MISMATCH&#xa;[FK] nota_fiscal_id INT64 99.99%&#xa;[FK] vendedor_id INT64 99.99%&#xa;data DATE | total NUMERIC&#xa;numero_pedido_compra STRING 0.2%&#xa;─────────────────&#xa;130.135 pedidos | R$ 9.538.019 | 48 lojas&#xa;🔴 contato_id ≠ contato.identificador (0% join)" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;" parent="14" vertex="1"><mxGeometry x="80" y="50" width="340" height="290" as="geometry"/></mxCell>
-<mxCell id="30" value="pedidos_vendas_itens&#xa;[PK] id INT64&#xa;[FK] pedidos_vendas_identificador INT64&#xa;[FK] codigo STRING ← produtos.codigo&#xa;[FK] produto_id INT64 ← produtos.identificador&#xa;descricao STRING&#xa;quantidade NUMERIC&#xa;valor NUMERIC&#xa;─────────────────&#xa;187.875 itens | R$ 9.054.613" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;" parent="14" vertex="1"><mxGeometry x="500" y="50" width="290" height="220" as="geometry"/></mxCell>
-<mxCell id="31" value="produtos&#xa;[PK] identificador INT64&#xa;[UK] codigo STRING ⚠️ 48.3% fill&#xa;nome STRING | preco NUMERIC&#xa;situacao STRING: A=1.730 / I / E&#xa;─────────────────&#xa;9.751 total | 1.730 ativos&#xa;⚠️ 510 SKUs vendidos sem cadastro&#xa;Impacto: R$ 95.170 sem margem" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#7c2d12;strokeColor=#f97316;fontColor=#ffffff;strokeWidth=1.5;" parent="14" vertex="1"><mxGeometry x="860" y="50" width="270" height="200" as="geometry"/></mxCell>
-<mxCell id="32" value="contato&#xa;[PK] identificador INT64 ← LONG ID&#xa;nome STRING 100%&#xa;email STRING ⚠️ 64.7% fill&#xa;numero_documento STRING 95.0% (CPF) ✓&#xa;telefone STRING ⚠️ 33.8% fill&#xa;endereco RECORD&#xa;─────────────────&#xa;120.479 clientes&#xa;⚠️ 42.588 sem email (35.3%)&#xa;⚠️ 6.068 sem CPF (5.0%)" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;" parent="14" vertex="1"><mxGeometry x="500" y="290" width="290" height="220" as="geometry"/></mxCell>
-<mxCell id="33" value="notas_fiscais_saida&#xa;[PK] identificador INT64&#xa;[UK] numero STRING 100%&#xa;data_emissao DATE&#xa;chave_acesso STRING 100% (44 dig)&#xa;loja_id INT64&#xa;situacao STRING&#xa;─────────────────&#xa;73.286 NFs | 56.3% dos pedidos&#xa;✓ cobertura quase completa" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;" parent="14" vertex="1"><mxGeometry x="860" y="290" width="270" height="200" as="geometry"/></mxCell>
-<mxCell id="34" value="bling_canais_venda&#xa;[PK] id_canal INT64&#xa;canal_edit STRING (nome do canal)&#xa;─────────────────&#xa;76 canais mapeados&#xa;Ex: Site Aroom, Shopee, ML" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;" parent="14" vertex="1"><mxGeometry x="1200" y="50" width="220" height="140" as="geometry"/></mxCell>
-<mxCell id="35" value="bling_estoque_saldos&#xa;[FK] produto_identificador INT64&#xa;saldo_fisico NUMERIC&#xa;saldo_virtual NUMERIC&#xa;─────────────────&#xa;44.117 saldos de estoque" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;" parent="14" vertex="1"><mxGeometry x="1200" y="230" width="220" height="130" as="geometry"/></mxCell>
-<mxCell id="36" value="customer_360&#xa;[PK] customer_id INT64 ← contato.identificador&#xa;rfm_score STRING&#xa;rfm_segment STRING&#xa;ltv_estimated NUMERIC&#xa;churn_probability FLOAT64&#xa;days_since_last_purchase INT64&#xa;total_orders INT64 | total_revenue NUMERIC" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#3b0764;strokeColor=#a855f7;fontColor=#ffffff;strokeWidth=1.5;" parent="15" vertex="1"><mxGeometry x="80" y="50" width="310" height="180" as="geometry"/></mxCell>
-<mxCell id="37" value="customer_rfm / customer_clusters&#xa;[FK] customer_id INT64&#xa;recency INT64 | frequency INT64&#xa;monetary NUMERIC&#xa;cluster_label STRING&#xa;─────────────────&#xa;Segmentos: Campeos / Em Risco / Perdidos" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#3b0764;strokeColor=#a855f7;fontColor=#ffffff;strokeWidth=1.5;" parent="15" vertex="1"><mxGeometry x="460" y="50" width="290" height="180" as="geometry"/></mxCell>
-<mxCell id="38" value="growth_engine_views&#xa;growth_engine_vendas_detalhado&#xa;growth_engine_crm_rfm&#xa;growth_engine_churn_risco&#xa;growth_engine_aquisicao&#xa;growth_engine_marketing_roas&#xa;─────────────────&#xa;Looker Studio ready" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#3b0764;strokeColor=#a855f7;fontColor=#ffffff;strokeWidth=1.5;" parent="15" vertex="1"><mxGeometry x="820" y="50" width="290" height="180" as="geometry"/></mxCell>
-<mxCell id="39" value="ml.customer_segments&#xa;features.customer_features&#xa;wallet_for_marketing.snapshot&#xa;ml.predictions&#xa;─────────────────&#xa;Modelos preditivos de churn / LTV&#xa;Base para campanhas de retencao" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#3b0764;strokeColor=#a855f7;fontColor=#ffffff;strokeWidth=1.5;" parent="15" vertex="1"><mxGeometry x="1180" y="50" width="280" height="180" as="geometry"/></mxCell>
-<mxCell id="40" value="utm_campaign → traffic_source.name&#xa;utm_source → traffic_source.source" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="16" target="19" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="41" value="utm_source=ig → traffic_source.source" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#3b82f6;strokeWidth=2;fontColor=#3b82f6;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="17" target="19" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="42" value="canal direto (sem UTM)&#xa;⚠️ sem rastreio GA4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6b7280;strokeWidth=1;dashed=1;fontColor=#6b7280;fontSize=9;endArrow=block;endFill=1;" parent="1" source="18" target="29" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="43" value="event_params[transaction_id]&#xa;→ recovery pipeline" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="19" target="21" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="44" value="GA4.event_params[transaction_id]&#xa;= pedidos_vendas.numero&#xa;⚠️ MEDIA · 20.5% cobertura" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="21" target="29" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="45" value="agrega eventos diarios" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#94a3b8;strokeWidth=1;fontColor=#94a3b8;fontSize=9;" parent="1" source="19" target="22" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="46" value="agrega por canal" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#94a3b8;strokeWidth=1;fontColor=#94a3b8;fontSize=9;" parent="1" source="19" target="23" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="47" value="checkout.token&#xa;= nuvemshop_pedidos.token&#xa;⚠️ MEDIA · 12.5% converte" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="26" target="27" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="48" value="nuvemshop_pedidos.store_id&#xa;= pedidos_vendas.loja_id&#xa;✓ ALTA · R$ 2.85M confirmado" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="27" target="29" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="49" value="contact_email = contato.email (64.7%)&#xa;CPF = contato.numero_documento (95%)&#xa;✓ ALTA · melhor bridge disponivel" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="27" target="32" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="50" value="pv.identificador&#xa;= pvi.pedidos_vendas_identificador&#xa;✓ FK nativa 100%" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="29" target="30" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="51" value="pvi.codigo&#xa;= produtos.codigo&#xa;⚠️ 510 SKUs faltantes (0.91%)" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="30" target="31" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="52" value="pv.contato_id (INT32)&#xa;≠ contato.identificador (INT64)&#xa;🔴 CRITICO · 0% join por ID&#xa;Workaround: usar email/CPF" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#ef4444;strokeWidth=2;dashed=1;fontColor=#ef4444;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="29" target="32" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="53" value="pv.nota_fiscal_id&#xa;= nf.identificador&#xa;✓ ALTA · 99.99%" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="29" target="33" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="54" value="pv.loja_id&#xa;= canais.id_canal&#xa;✓ 48 canais" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="29" target="34" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="55" value="produtos.identificador&#xa;= estoque.produto_identificador" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="31" target="35" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="56" value="perfit.contact_email&#xa;= contato.email&#xa;✓ ALTA · 75% match · 4.994 clientes" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="24" target="32" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="57" value="dispatch.contact_id&#xa;= contato.identificador&#xa;⚠️ MEDIA · schema investigate" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="25" target="32" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="58" value="contato.identificador&#xa;→ ETL pipeline diario&#xa;✓ alimenta Customer 360" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="32" target="36" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="59" value="pedidos_vendas → RFM calc" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="29" target="37" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="60" value="customer_360 → views Looker Studio" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#94a3b8;strokeWidth=1;fontColor=#94a3b8;fontSize=9;" parent="1" source="36" target="38" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="61" value="rfm → modelos ML" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#94a3b8;strokeWidth=1;fontColor=#94a3b8;fontSize=9;" parent="1" source="37" target="39" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="62" value="contato → Perfit lista export&#xa;loop CRM retorna p/ BigQuery daily" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#a855f7;strokeWidth=2;fontColor=#a855f7;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="36" target="24" edge="1"><mxGeometry relative="1" as="geometry"/></mxCell>
-<mxCell id="63" value="LEGENDA:  [PK] = Primary Key  |  [FK] = Foreign Key  |  [UK] = Unique Key&#xa;✓ ALTA confianca (match &gt;70% ou FK nativa)  |  ⚠️ MEDIA (cobertura parcial)  |  🔴 CRITICO (quebrado)&#xa;Cores de seta: VERDE=alta  AMARELO=media  VERMELHO=critico&#xa;★ = Fonte de verdade financeira  |  ⚠️ Campo com fill rate baixo" style="text;html=0;strokeColor=none;fillColor=#1e293b;align=left;verticalAlign=middle;fontColor=#94a3b8;fontSize=11;spacingLeft=10;rounded=1;" parent="1" vertex="1"><mxGeometry x="20" y="1700" width="1560" height="70" as="geometry"/></mxCell>
-
-  </root>
-</mxGraphModel>
+<mxfile host="app.diagrams.net">
+  <diagram id="wZYrdz9cXHzRgle9XChF" name="Page-1">
+    <mxGraphModel dx="3334" dy="1577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2200" pageHeight="1700" background="#0d1117" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="11" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=18;strokeColor=#f59e0b;fillColor=#78350f;fontColor=#ffffff;strokeWidth=2;rounded=1;" value="🎯  LAYER 0 — AQUISICAO (Paid Media)" vertex="1">
+          <mxGeometry height="220" width="1700" x="20" y="-220" as="geometry" />
+        </mxCell>
+        <mxCell id="16" parent="11" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#92400e;strokeColor=#f59e0b;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="GOOGLE ADS&#xa;[PK] campaign_id STRING&#xa;campaign_name STRING&#xa;cost_micros INT64&#xa;impressions INT64 / clicks INT64&#xa;─────────────────&#xa;Outbound: utm_campaign → GA4&#xa;Badge: pmax_roas_formula-exclusiva" vertex="1">
+          <mxGeometry height="170" width="320" x="-90" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="17" parent="11" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#1e3a8a;strokeColor=#3b82f6;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="META / INSTAGRAM ADS&#xa;[PK] campaign_id STRING (numerico)&#xa;spend NUMERIC / impressions INT64&#xa;date_start DATE&#xa;─────────────────&#xa;Outbound: utm_source=ig → GA4&#xa;Campanha: 120209681087360703" vertex="1">
+          <mxGeometry height="150" width="310" x="450" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="18" parent="11" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#374151;strokeColor=#6b7280;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="SHOPEE / ML / TIKTOK&#xa;canal STRING (sem UTM tracking)&#xa;spend por canal&#xa;─────────────────&#xa;⚠️ SEM rastreio GA4&#xa;Chega direto no Bling via integracao" vertex="1">
+          <mxGeometry height="120" width="310" x="820" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="12" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=18;strokeColor=#3b82f6;fillColor=#1e3a8a;fontColor=#ffffff;strokeWidth=2;rounded=1;" value="🌐  LAYER 1 — FRONTEND (GA4 + Email CRM)" vertex="1">
+          <mxGeometry height="350" width="1700" x="20" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="19" parent="12" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#1e40af;strokeColor=#3b82f6;fontColor=#ffffff;strokeWidth=1.5;" value="GA4 events_YYYYMMDD&#xa;[PK] user_pseudo_id STRING (cookie)&#xa;event_name STRING&#xa;event_date STRING (particao)&#xa;traffic_source.source STRING 99.7%&#xa;traffic_source.medium STRING 99.7%&#xa;traffic_source.name STRING (campaign)&#xa;[FK→Bling] event_params[transaction_id] ⚠️&#xa;device.category STRING&#xa;geo.country / region / city STRING&#xa;─────────────────&#xa;185.602 eventos | 18 dias | Nov/25–Jun/26&#xa;266 purchase | 17.881 sessions" vertex="1">
+          <mxGeometry height="250" width="310" x="80" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="20" parent="12" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#166534;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="FUNIL GA4&#xa;session_start: 17.881&#xa;view_item: 3.673&#xa;add_to_cart: 3.673&#xa;begin_checkout: 431&#xa;PURCHASE: 266&#xa;─────────────────&#xa;⚠️ transaction_id NULL em 79.5%" vertex="1">
+          <mxGeometry height="230" width="260" x="440" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="21" parent="12" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#065f46;strokeColor=#10b981;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="ga4_recovery_ecommerce&#xa;[PK] transactionId STRING&#xa;session_source STRING&#xa;session_medium STRING&#xa;purchase_revenue NUMERIC&#xa;─────────────────&#xa;4.955 transacoes | R$ 512.023&#xa;[FK→Bling] transactionId=numero" vertex="1">
+          <mxGeometry height="220" width="270" x="710" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="24" parent="12" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#4c1d95;strokeColor=#7c3aed;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="perfit_campaign_actions&#xa;[PK] id INT64&#xa;[FK] campaign_id INT64&#xa;action_type STRING ENUM&#xa;  SENT 56.9% / OPEN 40.7%&#xa;  CLICK 1.9% / BOUNCE 0.1%&#xa;[FK→Bling] contact_email STRING 100%&#xa;action_at DATETIME&#xa;─────────────────&#xa;297.434 eventos | 6.656 emails unicos" vertex="1">
+          <mxGeometry height="260" width="270" x="1000" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="25" parent="12" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#4c1d95;strokeColor=#7c3aed;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="dispatch_send_log&#xa;[PK] id INT64&#xa;[FK→Bling] contact_id INT64 100%&#xa;rule_tag STRING ENUM&#xa;  aniversario&#xa;  sinto_sua_falta&#xa;  produto_acabando_cliente&#xa;  sinto_sua_falta_2&#xa;anchor_date DATE | sent_at DATETIME&#xa;─────────────────&#xa;22.376 envios | 15.941 clientes | 4 regras" vertex="1">
+          <mxGeometry height="270" width="270" x="1300" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="13" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=18;strokeColor=#14b8a6;fillColor=#134e4a;fontColor=#ffffff;strokeWidth=2;rounded=1;" value="🛒  LAYER 2 — BACKEND / E-COMMERCE (Nuvemshop + Checkout)" vertex="1">
+          <mxGeometry height="320" width="1700" x="20" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="27" parent="13" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#0f3b3b;strokeColor=#14b8a6;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="nuvemshop_pedidos&#xa;[PK] token STRING 100% (ID pedido)&#xa;customer_id INT64 100% ← ID Nuvemshop&#xa;contact_email STRING 100% ← bridge&#xa;contact_identification STRING 100% (CPF)&#xa;store_id INT64 100% = 2537710 ← bridge&#xa;payment_status STRING paid=93.6%&#xa;fulfillment_status STRING ⚠️ 0% VAZIO&#xa;shipping_address RECORD&#xa;─────────────────&#xa;19.915 pedidos | 16.882 clientes | Jan/25–Jun/26" vertex="1">
+          <mxGeometry height="260" width="330" x="540" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="28" parent="13" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#0f3b3b;strokeColor=#14b8a6;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="nuvemshop_pedido_produto&#xa;[PK] id INT64&#xa;[FK] pedido_id INT64 → nuvemshop_pedidos&#xa;sku STRING ← bridge catalogo&#xa;name STRING&#xa;quantity INT64&#xa;price NUMERIC&#xa;─────────────────&#xa;48.690 itens" vertex="1">
+          <mxGeometry height="230" width="290" x="1090" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="14" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=18;strokeColor=#22c55e;fillColor=#14532d;fontColor=#ffffff;strokeWidth=2;rounded=1;fontFamily=Helvetica;align=center;verticalAlign=top;spacingLeft=6;spacingTop=4;" value="🏦  LAYER 3 — BLING ERP (Fonte de Verdade | R$ 9.538.019)" vertex="1">
+          <mxGeometry height="670" width="1710" x="20" y="1020" as="geometry" />
+        </mxCell>
+        <mxCell id="29" parent="14" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="pedidos_vendas  ★ FONTE DE VERDADE&#xa;[PK] identificador INT64 100%&#xa;[UK] numero INT64 100% ← transactionId GA4&#xa;[FK] loja_id INT64 100% ← canais_venda&#xa;[FK] contato_id INT64 100% ⚠️ SCHEMA MISMATCH&#xa;[FK] nota_fiscal_id INT64 99.99%&#xa;[FK] vendedor_id INT64 99.99%&#xa;data DATE | total NUMERIC&#xa;numero_pedido_compra STRING 0.2%&#xa;─────────────────&#xa;130.135 pedidos | R$ 9.538.019 | 48 lojas&#xa;🔴 contato_id ≠ contato.identificador (0% join)" vertex="1">
+          <mxGeometry height="290" width="340" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="o1eA_RlrRVMwM92EHt5x-65" edge="1" parent="14" source="30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="32" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="30" parent="14" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="pedidos_vendas_itens&#xa;[PK] id INT64&#xa;[FK] pedidos_vendas_identificador INT64&#xa;[FK] codigo STRING ← produtos.codigo&#xa;[FK] produto_id INT64 ← produtos.identificador&#xa;descricao STRING&#xa;quantidade NUMERIC&#xa;valor NUMERIC&#xa;─────────────────&#xa;187.875 itens | R$ 9.054.613" vertex="1">
+          <mxGeometry height="260" width="290" x="520" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="31" parent="14" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#7c2d12;strokeColor=#f97316;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="produtos&#xa;[PK] identificador INT64&#xa;[UK] codigo STRING ⚠️ 48.3% fill&#xa;nome STRING | preco NUMERIC&#xa;situacao STRING: A=1.730 / I / E&#xa;─────────────────&#xa;9.751 total | 1.730 ativos&#xa;⚠️ 510 SKUs vendidos sem cadastro&#xa;Impacto: R$ 95.170 sem margem" vertex="1">
+          <mxGeometry height="200" width="270" x="1020" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="32" parent="14" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="contato&#xa;[PK] identificador INT64 ← LONG ID&#xa;nome STRING 100%&#xa;email STRING ⚠️ 64.7% fill&#xa;numero_documento STRING 95.0% (CPF) ✓&#xa;telefone STRING ⚠️ 33.8% fill&#xa;endereco RECORD&#xa;─────────────────&#xa;120.479 clientes&#xa;⚠️ 42.588 sem email (35.3%)&#xa;⚠️ 6.068 sem CPF (5.0%)" vertex="1">
+          <mxGeometry height="240" width="290" x="690" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="o1eA_RlrRVMwM92EHt5x-63" edge="1" parent="14" source="29" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#ffffff;fontSize=15;fontStyle=1;endArrow=block;endFill=1;fontFamily=Helvetica;align=left;verticalAlign=top;spacingLeft=6;spacingTop=4;" target="32" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="285" as="sourcePoint" />
+            <mxPoint x="1440" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="33" parent="14" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="notas_fiscais_saida&#xa;[PK] identificador INT64&#xa;[UK] numero STRING 100%&#xa;data_emissao DATE&#xa;chave_acesso STRING 100% (44 dig)&#xa;loja_id INT64&#xa;situacao STRING&#xa;─────────────────&#xa;73.286 NFs | 56.3% dos pedidos&#xa;✓ cobertura quase completa" vertex="1">
+          <mxGeometry height="220" width="300" x="1410" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="53" edge="1" parent="14" source="32" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=14;fontStyle=1;endArrow=block;endFill=1;" target="33" value="pv.nota_fiscal_id&#xa;= nf.identificador&#xa;✓ ALTA · 99.99%">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="15" parent="1" style="swimlane;startSize=32;fontStyle=1;fontSize=13;strokeColor=#a855f7;fillColor=#3b0764;fontColor=#ffffff;strokeWidth=2;rounded=1;" value="🧠  LAYER 4 — CUSTOMER INTELLIGENCE + CRM" vertex="1">
+          <mxGeometry height="300" width="1720" x="10" y="1700" as="geometry" />
+        </mxCell>
+        <mxCell id="36" parent="15" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#3b0764;strokeColor=#a855f7;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="customer_360&#xa;[PK] customer_id INT64 ← contato.identificador&#xa;rfm_score STRING&#xa;rfm_segment STRING&#xa;ltv_estimated NUMERIC&#xa;churn_probability FLOAT64&#xa;days_since_last_purchase INT64&#xa;total_orders INT64 | total_revenue NUMERIC" vertex="1">
+          <mxGeometry height="180" width="310" x="80" y="51" as="geometry" />
+        </mxCell>
+        <mxCell id="38" parent="15" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#3b0764;strokeColor=#a855f7;fontColor=#ffffff;strokeWidth=1.5;fontStyle=1" value="growth_engine_views&#xa;growth_engine_vendas_detalhado&#xa;growth_engine_crm_rfm&#xa;growth_engine_churn_risco&#xa;growth_engine_aquisicao&#xa;growth_engine_marketing_roas&#xa;─────────────────&#xa;Looker Studio ready" vertex="1">
+          <mxGeometry height="180" width="290" x="820" y="51" as="geometry" />
+        </mxCell>
+        <mxCell id="39" parent="15" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#3b0764;strokeColor=#a855f7;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="ml.customer_segments&#xa;features.customer_features&#xa;wallet_for_marketing.snapshot&#xa;ml.predictions&#xa;─────────────────&#xa;Modelos preditivos de churn / LTV&#xa;Base para campanhas de retencao" vertex="1">
+          <mxGeometry height="180" width="280" x="1180" y="51" as="geometry" />
+        </mxCell>
+        <mxCell id="37" parent="15" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#3b0764;strokeColor=#a855f7;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="customer_rfm / customer_clusters&#xa;[FK] customer_id INT64&#xa;recency INT64 | frequency INT64&#xa;monetary NUMERIC&#xa;cluster_label STRING&#xa;─────────────────&#xa;Segmentos: Campeos / Em Risco / Perdidos" vertex="1">
+          <mxGeometry height="180" width="290" x="460" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="61" edge="1" parent="15" source="37" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#94a3b8;strokeWidth=1;fontColor=#94a3b8;fontSize=9;" target="39" value="">
+          <mxGeometry relative="1" x="-0.0205" y="-90" as="geometry">
+            <mxPoint x="-90" y="91" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="40" edge="1" parent="1" source="16" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=13;fontStyle=1;endArrow=block;endFill=1;" target="19" value="utm_campaign → traffic_source.name&#xa;utm_source → traffic_source.source">
+          <mxGeometry relative="1" x="-0.0769" y="-115" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="41" edge="1" parent="1" source="17" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#3b82f6;strokeWidth=2;fontColor=#3b82f6;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" target="19" value="utm_source=ig → traffic_source.source">
+          <mxGeometry relative="1" x="0.9487" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="43" edge="1" parent="1" source="19" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=13;fontStyle=1;endArrow=block;endFill=1;" target="21" value="event_params[transaction_id]&#xa;→ recovery pipeline">
+          <mxGeometry relative="1" x="-0.0448" y="-138" as="geometry">
+            <mxPoint x="-108" y="135" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="44" edge="1" parent="1" source="21" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=12;fontStyle=1;endArrow=block;endFill=1;" target="29" value="GA4.event_params[transaction_id]&#xa;= pedidos_vendas.numero&#xa;⚠️ MEDIA · 20.5% cobertura">
+          <mxGeometry relative="1" x="0.0066" y="80" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="45" edge="1" parent="1" source="19" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#94a3b8;strokeWidth=1;fontColor=#94a3b8;fontSize=13;" target="22" value="agrega eventos diarios">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="46" edge="1" parent="1" source="19" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#94a3b8;strokeWidth=1;fontColor=#94a3b8;fontSize=9;" target="23" value="agrega por canal">
+          <mxGeometry relative="1" x="-0.0789" y="5" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="47" edge="1" parent="1" source="26" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=11;fontStyle=1;endArrow=block;endFill=1;" target="27" value="checkout.token&#xa;= nuvemshop_pedidos.token&#xa;⚠️ MEDIA · 12.5% converte">
+          <mxGeometry relative="1" x="-0.0857" y="-26" as="geometry">
+            <mxPoint x="26" y="-26" as="offset" />
+            <Array as="points">
+              <mxPoint x="480" y="760" />
+              <mxPoint x="480" y="775" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="48" edge="1" parent="1" source="26" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" target="29" value="nuvemshop_pedidos.store_id&#xa;= pedidos_vendas.loja_id&#xa;✓ ALTA · R$ 2.85M confirmado">
+          <mxGeometry relative="1" x="0.4362" y="20" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="49" edge="1" parent="1" source="27" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" target="32" value="contact_email = contato.email (64.7%)&#xa;CPF = contato.numero_documento (95%)&#xa;✓ ALTA · melhor bridge disponivel">
+          <mxGeometry relative="1" x="-0.403" y="55" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="56" edge="1" parent="1" source="24" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=11;fontStyle=1;endArrow=block;endFill=1;" target="32" value="perfit.contact_email&#xa;= contato.email&#xa;✓ ALTA · 75% match · 4.994 clientes">
+          <mxGeometry relative="1" x="0.0178" y="155" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="57" edge="1" parent="1" source="25" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#f59e0b;strokeWidth=2;dashed=1;fontColor=#f59e0b;fontSize=13;fontStyle=1;endArrow=block;endFill=1;" target="32" value="dispatch.contact_id&#xa;= contato.identificador&#xa;⚠️ MEDIA · schema investigate">
+          <mxGeometry relative="1" x="-0.0706" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="58" edge="1" parent="1" source="32" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=14;fontStyle=1;endArrow=block;endFill=1;" target="36" value="contato.identificador&#xa;→ ETL pipeline diario&#xa;✓ alimenta Customer 360">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="59" edge="1" parent="1" source="29" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=13;fontStyle=1;endArrow=block;endFill=1;" target="37" value="pedidos_vendas → RFM calc">
+          <mxGeometry relative="1" x="0.1831" y="-55" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="60" edge="1" parent="1" source="36" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#94a3b8;strokeWidth=1;fontColor=#94a3b8;fontSize=11;" target="38" value="">
+          <mxGeometry relative="1" x="0.1163" y="91" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="62" edge="1" parent="1" source="36" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#a855f7;strokeWidth=2;fontColor=#a855f7;fontSize=12;fontStyle=1;endArrow=block;endFill=1;" target="24" value="contato → Perfit lista export&#xa;loop CRM retorna p/ BigQuery daily">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1155" y="1810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="63" parent="1" style="text;html=0;strokeColor=none;fillColor=#1e293b;align=left;verticalAlign=top;fontColor=#ffffff;fontSize=15;spacingLeft=6;rounded=1;fontFamily=Helvetica;fontStyle=1;spacingTop=4;" value="LEGENDA:  [PK] = Primary Key  |  [FK] = Foreign Key  |  [UK] = Unique Key&#xa;✓ ALTA confianca (match &gt;70% ou FK nativa)  |  ⚠️ MEDIA (cobertura parcial)  |  🔴 CRITICO (quebrado)&#xa;Cores de seta: VERDE=alta  AMARELO=media  VERMELHO=critico&#xa;★ = Fonte de verdade financeira  |  ⚠️ Campo com fill rate baixo" vertex="1">
+          <mxGeometry height="100" width="1720" x="10" y="2010" as="geometry" />
+        </mxCell>
+        <mxCell id="34" parent="1" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="bling_canais_venda&#xa;[PK] id_canal INT64&#xa;canal_edit STRING (nome do canal)&#xa;─────────────────&#xa;76 canais mapeados&#xa;Ex: Site Aroom, Shopee, ML" vertex="1">
+          <mxGeometry height="150" width="280" x="1450" y="1080" as="geometry" />
+        </mxCell>
+        <mxCell id="35" parent="1" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="bling_estoque_saldos&#xa;[FK] produto_identificador INT64&#xa;saldo_fisico NUMERIC&#xa;saldo_virtual NUMERIC&#xa;─────────────────&#xa;44.117 saldos de estoque" vertex="1">
+          <mxGeometry height="140" width="270" x="1460" y="1260" as="geometry" />
+        </mxCell>
+        <mxCell id="54" edge="1" parent="1" source="29" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" target="34" value="pv.loja_id&#xa;= canais.id_canal&#xa;✓ 48 canais">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="55" edge="1" parent="1" source="31" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" target="35" value="produtos.identificador&#xa;= estoque.produto_identificador">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="22" parent="1" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=10;spacingLeft=6;spacingTop=4;fillColor=#134e4a;strokeColor=#0d9488;fontColor=#ffffff;strokeWidth=1.5;" value="ga4_utm_daily&#xa;[PK] metric_date DATE&#xa;session_campaign_name STRING&#xa;session_source STRING&#xa;session_medium STRING&#xa;purchases INT64&#xa;purchase_revenue NUMERIC&#xa;─────────────────&#xa;21.266 linhas | Jan/25–Jun/26" vertex="1">
+          <mxGeometry height="160" width="230" x="-70" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="23" parent="1" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#134e4a;strokeColor=#0d9488;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="ga4_revenue_channel_daily&#xa;[PK] metric_date DATE&#xa;channel_group STRING&#xa;purchase_revenue NUMERIC&#xa;ROAS NUMERIC&#xa;─────────────────&#xa;R$ 1.68M | por canal&#xa;8.444 linhas" vertex="1">
+          <mxGeometry height="160" width="270" x="470" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="26" parent="1" style="rounded=1;whiteSpace=wrap;html=0;align=left;verticalAlign=top;fontSize=15;spacingLeft=6;spacingTop=4;fillColor=#0f3b3b;strokeColor=#14b8a6;fontColor=#ffffff;strokeWidth=1.5;fontFamily=Helvetica;fontStyle=1;" value="checkout&#xa;[PK] token STRING 100% (ID unico carrinho)&#xa;contact_email STRING 100% ← bridge&#xa;contact_identification STRING 100% (CPF)&#xa;store_id INT64 100% = 2537710&#xa;shipping_zipcode STRING 100%&#xa;created_at DATETIME&#xa;─────────────────&#xa;2.568 carrinhos | 2.294 emails unicos&#xa;⚠️ 87.5% NAO converte em pedido" vertex="1">
+          <mxGeometry height="250" width="300" x="30" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="o1eA_RlrRVMwM92EHt5x-66" edge="1" parent="1" source="27" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#22c55e;strokeWidth=2;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" target="26" value="">
+          <mxGeometry relative="1" x="0.4362" y="20" as="geometry">
+            <mxPoint y="1" as="offset" />
+            <mxPoint x="560" y="780" as="sourcePoint" />
+            <mxPoint x="190" y="1160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
