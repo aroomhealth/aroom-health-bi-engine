@@ -24,4 +24,9 @@ with open('sql/production/growth_engine_marketing_roas.sql', 'r', encoding='utf-
     roas_sql = f.read()
 run_bq("CREATE OR REPLACE VIEW `iron-rex-461220-g4.customer_intelligence.growth_engine_marketing_roas` AS \n" + roas_sql)
 
+print("Deploying Auditoria...")
+with open('sql/production/growth_engine_auditoria_receita.sql', 'r', encoding='utf-8') as f:
+    auditoria_sql = f.read()
+run_bq("CREATE OR REPLACE VIEW `iron-rex-461220-g4.customer_intelligence.growth_engine_auditoria_receita` AS \n" + auditoria_sql)
+
 print("All done!")
