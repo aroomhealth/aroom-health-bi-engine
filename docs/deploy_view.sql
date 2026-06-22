@@ -1,9 +1,10 @@
+CREATE OR REPLACE VIEW `iron-rex-461220-g4.customer_intelligence.growth_engine_vendas_detalhado` AS
 -- ==============================================================================
 -- VIEW: growth_engine_vendas_detalhado
 -- DATASET: customer_intelligence
 -- DESCRICAO: View consolidada de vendas no nivel de item. Corrige o fan-out
---            de joins 1-para-N, incorpora as dimensoes da SmartMetrics, e
---            adiciona calculos avançados de Unit Economics (DRE na linha).
+--            de joins 1-para-N e incorpora as dimensoes da SmartMetrics.
+-- FATURAMENTO AUDITADO: R$ 9.540.041,07
 -- ==============================================================================
 
 WITH frete_pedido AS (
@@ -44,38 +45,6 @@ canais_unique AS (
     FROM `iron-rex-461220-g4.database_aroom_health.bling_canais_venda`
     GROUP BY id_canal
 ),
--- DRE CTEs (Unit Economics)
-forma_pagto AS (
-    SELECT 
-        pp.pedidos_vendas_identificador as pedido_id, 
-        MAX(LOWER(COALESCE(fp.descricao, ''))) as forma_pagto 
-    FROM `iron-rex-461220-g4.database_aroom_health.pedidos_vendas_parcelas` pp
-    LEFT JOIN `iron-rex-461220-g4.database_aroom_health.formas_pagamento` fp ON pp.forma_pagamento_id = fp.id
-    GROUP BY 1
-),
-ads_raw AS (
-    SELECT DATE(segments_date) as data_referencia, CAST(SUM(metrics_cost_micros/1000000) AS FLOAT64) as investimento FROM `iron-rex-461220-g4.google_ads.ads_CampaignStats_5644422842` GROUP BY 1
-    UNION ALL
-    SELECT date as data_referencia, CAST(spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.facebook_ads_insights`
-    UNION ALL
-    SELECT date as data_referencia, CAST(spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.tiktok_ads_insights`
-),
-marketing_diario AS (
-    SELECT 
-        DATE(data_referencia) as data_mkt, 
-        SUM(investimento) as custo_mkt_dia 
-    FROM ads_raw 
-    GROUP BY 1
-),
-receita_diaria AS (
-    SELECT 
-        DATE(p.data) as data_rec, 
-        SUM(i.valor * i.quantidade) as receita_total_dia 
-    FROM `iron-rex-461220-g4.database_aroom_health.pedidos_vendas` p 
-    JOIN `iron-rex-461220-g4.database_aroom_health.pedidos_vendas_itens` i ON p.identificador = i.pedidos_vendas_identificador 
-    WHERE p.situacao_id NOT IN (12, 105) 
-    GROUP BY 1
-),
 base_limpa AS (
     SELECT 
         -- Chaves
@@ -84,7 +53,6 @@ base_limpa AS (
         p.data as data_compra,
         p.identificador as pedido_id,
         i.identificador as item_id,
-        p.contato_id as id_cliente,
         
         -- Localidade
         pe.estado as uf,
@@ -148,12 +116,11 @@ base_limpa AS (
             ELSE cat.subcategoria_produto
         END as subcategoria_produto,
         
-        -- Metricas base (Níveis de Item a partir da base NOVA)
+        -- Metricas (Níveis de Item a partir da base NOVA)
         i.quantidade as quantidade_comprada,
-        (i.valor * i.quantidade) as receita_bruta,
-        COALESCE(i.desconto, 0) as desconto_item,
+        (i.valor * i.quantidade) as receita_total,
         
-        -- Flag de Auditoria de Custo
+        -- Flag de Auditoria de Custo (Para Estudos e Ajustes)
         CASE 
             WHEN COALESCE(prod.preco_custo, 0) > 0 THEN '1. Custo Original (ERP Bling)'
             WHEN plan.custo_total_real > 0 THEN '2. Custo Correto (Planilha Oficial)'
@@ -174,7 +141,7 @@ base_limpa AS (
                 END
         END as custo_unitario,
         
-        -- Custo Total Produto
+        -- Custo Total e Lucro Bruto atualizados
         (
             CASE 
                 WHEN COALESCE(prod.preco_custo, 0) > 0 THEN prod.preco_custo
@@ -190,45 +157,26 @@ base_limpa AS (
             END * i.quantidade
         ) as custo_total_produto,
         
-        -- Calculo do Frete Rateado
+        ((i.valor * i.quantidade) - (
+            CASE 
+                WHEN COALESCE(prod.preco_custo, 0) > 0 THEN prod.preco_custo
+                WHEN plan.custo_total_real > 0 THEN plan.custo_total_real
+                ELSE 
+                    CASE
+                        WHEN cat.categoria_produto = 'Óleos Vegetais' THEN i.valor * 0.40 
+                        WHEN cat.categoria_produto = 'Óleos Essenciais' THEN i.valor * 0.35
+                        WHEN cat.categoria_produto = 'Tintura Mãe' THEN i.valor * 0.30
+                        WHEN cat.categoria_produto LIKE '%Kits%' THEN i.valor * 0.45
+                        ELSE i.valor * 0.50 
+                    END
+            END * i.quantidade
+        )) as lucro_bruto,
+        
+        -- Calculo do Frete Rateado (100% Nativo na nossa base nova)
         CASE 
             WHEN vt.soma_valor_produtos > 0 THEN COALESCE(f.frete_total, 0) * ((i.valor * i.quantidade) / vt.soma_valor_produtos)
             ELSE 0 
-        END as custo_frete,
-
-        -- Receita Líquida (Abatendo desconto e frete)
-        ((i.valor * i.quantidade) - COALESCE(i.desconto, 0) - (
-            CASE 
-                WHEN vt.soma_valor_produtos > 0 THEN COALESCE(f.frete_total, 0) * ((i.valor * i.quantidade) / vt.soma_valor_produtos)
-                ELSE 0 
-            END
-        )) as receita_liquida,
-
-        -- ---------------------------------------------------------
-        -- NOVOS CÁLCULOS DO UNIT ECONOMICS (DRE NA LINHA)
-        -- ---------------------------------------------------------
-
-        -- Impostos Fixo (8.2%)
-        ((i.valor * i.quantidade) * 0.082) as custo_impostos,
-
-        -- Taxa de Gateway (Pix 1%, Cartão 3.5%, Boleto 3.00)
-        CASE 
-            WHEN LOWER(COALESCE(fp.forma_pagto, '')) LIKE '%boleto%' THEN 3.00 * ((i.valor * i.quantidade) / NULLIF(vt.soma_valor_produtos, 0))
-            WHEN LOWER(COALESCE(fp.forma_pagto, '')) LIKE '%pix%' THEN (i.valor * i.quantidade) * 0.01
-            ELSE (i.valor * i.quantidade) * 0.035 
-        END as custo_taxa_gateway,
-
-        -- Marketing Diário Rateado
-        CASE 
-            WHEN rec.receita_total_dia > 0 THEN (i.valor * i.quantidade) * (COALESCE(mkt.custo_mkt_dia, 0) / rec.receita_total_dia) 
-            ELSE 0 
-        END as custo_marketing_rateado,
-
-        -- Custo Operacional (Contador R$ 150/mes = 5.00/dia)
-        CASE 
-            WHEN rec.receita_total_dia > 0 THEN (i.valor * i.quantidade) * (5.00 / rec.receita_total_dia) 
-            ELSE 0 
-        END as custo_operacional_rateado
+        END as custo_frete
 
     FROM `iron-rex-461220-g4.database_aroom_health.pedidos_vendas` p
     JOIN `iron-rex-461220-g4.database_aroom_health.pedidos_vendas_itens` i 
@@ -252,22 +200,11 @@ base_limpa AS (
     LEFT JOIN `iron-rex-461220-g4.database_aroom_health.sku_custos_reais` plan
         ON CAST(prod.codigo AS STRING) = CAST(plan.sku AS STRING)
 
-    -- DRE Joins
-    LEFT JOIN forma_pagto fp ON p.identificador = fp.pedido_id
-    LEFT JOIN marketing_diario mkt ON DATE(p.data) = mkt.data_mkt
-    LEFT JOIN receita_diaria rec ON DATE(p.data) = rec.data_rec
-
     WHERE p.situacao_id NOT IN (12, 105)
 )
 
 SELECT 
     *,
-    -- LUCRO BRUTO ORIGINAL
-    (receita_liquida - custo_total_produto) as lucro_bruto,
-    
-    -- MARGEM LIQUIDA FINAL (EBITDA UNITARIO)
-    (receita_liquida - custo_total_produto - custo_impostos - custo_taxa_gateway - custo_marketing_rateado - custo_operacional_rateado) as margem_liquida_final,
-
     -- SMART METRICS ENGINE
     -- 1. Familia Produto
     CASE 
@@ -309,12 +246,12 @@ SELECT
         ELSE 'Outros'
     END as nivel_especializacao,
     
-    -- 5. Faixa de Valor (Usando Receita Bruta)
+    -- 5. Faixa de Valor
     CASE 
-        WHEN (receita_bruta / NULLIF(quantidade_comprada, 0)) < 50 THEN '1. Entrada (< R$50)'
-        WHEN (receita_bruta / NULLIF(quantidade_comprada, 0)) >= 50 AND (receita_bruta / NULLIF(quantidade_comprada, 0)) < 100 THEN '2. Médio (R$50-100)'
-        WHEN (receita_bruta / NULLIF(quantidade_comprada, 0)) >= 100 AND (receita_bruta / NULLIF(quantidade_comprada, 0)) < 200 THEN '3. Premium (R$100-200)'
-        WHEN (receita_bruta / NULLIF(quantidade_comprada, 0)) >= 200 THEN '4. High Ticket (> R$200)'
+        WHEN (receita_total / NULLIF(quantidade_comprada, 0)) < 50 THEN '1. Entrada (< R$50)'
+        WHEN (receita_total / NULLIF(quantidade_comprada, 0)) >= 50 AND (receita_total / NULLIF(quantidade_comprada, 0)) < 100 THEN '2. Médio (R$50-100)'
+        WHEN (receita_total / NULLIF(quantidade_comprada, 0)) >= 100 AND (receita_total / NULLIF(quantidade_comprada, 0)) < 200 THEN '3. Premium (R$100-200)'
+        WHEN (receita_total / NULLIF(quantidade_comprada, 0)) >= 200 THEN '4. High Ticket (> R$200)'
         ELSE 'Desconhecido'
     END as faixa_valor_produto,
     

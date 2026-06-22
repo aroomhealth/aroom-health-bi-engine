@@ -1,0 +1,1 @@
+SELECT lucro_bruto < 0 as prejuizo, count(*) as qtd FROM `iron-rex-461220-g4.customer_intelligence.growth_engine_vendas_detalhado` WHERE data_venda >= '2026-01-01' AND is_produto_ativo = 'Sim' GROUP BY 1
