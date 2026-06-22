@@ -24,12 +24,13 @@ Abrir no draw.io:
 # ─────────────────────────────────────────────────────────────────────────────
 
 def esc(text: str) -> str:
-    """Escapa caracteres especiais para XML."""
+    """Escapa caracteres especiais para XML (atributos)."""
     return (text
             .replace("&", "&amp;")
             .replace("<", "&lt;")
             .replace(">", "&gt;")
-            .replace('"', "&quot;"))
+            .replace('"', "&quot;")
+            .replace("\n", "&#xa;"))
 
 
 _id_counter = 1
@@ -154,10 +155,10 @@ def build_diagram() -> str:
     cells = []
 
     # ── Swimlane coords ──────────────────────────────────────────────────────
-    SW_X, SW_W = 30, 1300
-    FRONT_Y,  FRONT_H  = 40,  320
-    BACK_Y,   BACK_H   = 400, 220
-    BLING_Y,  BLING_H  = 660, 300
+    SW_X, SW_W = 30, 1500
+    FRONT_Y,  FRONT_H  = 40,  380
+    BACK_Y,   BACK_H   = 460, 280
+    BLING_Y,  BLING_H  = 790, 380
 
     # ── IDs ──────────────────────────────────────────────────────────────────
     id_sw_front  = new_id()
@@ -222,16 +223,16 @@ def build_diagram() -> str:
     )
 
     cells.append(cell(id_ads, "Google / Meta Ads\nUTM params →",
-                      STYLE_BOX_ADS, 60, 50, 160, 60, parent=id_sw_front))
+                      STYLE_BOX_ADS, 60, 50, 180, 70, parent=id_sw_front))
     cells.append(cell(id_ga4, ga4_fields,
-                      STYLE_BOX_GA4, 250, 40, 260, 200, parent=id_sw_front))
+                      STYLE_BOX_GA4, 280, 40, 300, 220, parent=id_sw_front))
     cells.append(cell(id_funnel,
                       "page_view  →  view_item  →  add_to_cart  →  begin_checkout  →  PURCHASE ✓",
-                      STYLE_BOX_FUNNEL, 250, 255, 540, 40, parent=id_sw_front))
+                      STYLE_BOX_FUNNEL, 280, 275, 580, 50, parent=id_sw_front))
     cells.append(cell(id_perfit, perfit_fields,
-                      STYLE_BOX_EMAIL, 850, 40, 210, 160, parent=id_sw_front))
+                      STYLE_BOX_EMAIL, 950, 40, 250, 190, parent=id_sw_front))
     cells.append(cell(id_dispatch, dispatch_fields,
-                      STYLE_BOX_EMAIL, 1075, 40, 200, 160, parent=id_sw_front))
+                      STYLE_BOX_EMAIL, 1220, 40, 240, 190, parent=id_sw_front))
 
     # ─── BACKEND boxes ───────────────────────────────────────────────────────
     checkout_fields = (
@@ -267,11 +268,11 @@ def build_diagram() -> str:
     )
 
     cells.append(cell(id_checkout, checkout_fields,
-                      STYLE_BOX_TEAL, 60, 50, 230, 160, parent=id_sw_back))
+                      STYLE_BOX_TEAL, 60, 50, 270, 210, parent=id_sw_back))
     cells.append(cell(id_ns_ped, ns_ped_fields,
-                      STYLE_BOX_TEAL, 340, 50, 240, 160, parent=id_sw_back))
+                      STYLE_BOX_TEAL, 380, 50, 280, 220, parent=id_sw_back))
     cells.append(cell(id_ns_prod, ns_prod_fields,
-                      STYLE_BOX_TEAL, 640, 50, 210, 130, parent=id_sw_back))
+                      STYLE_BOX_TEAL, 710, 50, 250, 170, parent=id_sw_back))
 
     # ─── BLING boxes ─────────────────────────────────────────────────────────
     pv_fields = (
@@ -332,15 +333,15 @@ def build_diagram() -> str:
     )
 
     cells.append(cell(id_pv, pv_fields,
-                      STYLE_BOX_GREEN_MAIN, 60, 50, 240, 230, parent=id_sw_bling))
+                      STYLE_BOX_GREEN_MAIN, 60, 50, 280, 270, parent=id_sw_bling))
     cells.append(cell(id_pvi, pvi_fields,
-                      STYLE_BOX_GREEN, 360, 50, 230, 180, parent=id_sw_bling))
+                      STYLE_BOX_GREEN, 400, 50, 270, 210, parent=id_sw_bling))
     cells.append(cell(id_prod, prod_fields,
-                      STYLE_BOX_WARN, 650, 50, 220, 180, parent=id_sw_bling))
+                      STYLE_BOX_WARN, 730, 50, 260, 210, parent=id_sw_bling))
     cells.append(cell(id_contato, contato_fields,
-                      STYLE_BOX_GREEN, 360, 250, 200, 150, parent=id_sw_bling))
+                      STYLE_BOX_GREEN, 400, 290, 270, 180, parent=id_sw_bling))
     cells.append(cell(id_nf, nf_fields,
-                      STYLE_BOX_GREEN, 650, 250, 200, 150, parent=id_sw_bling))
+                      STYLE_BOX_GREEN, 730, 290, 260, 180, parent=id_sw_bling))
 
     # ─── INTERNAL EDGES ──────────────────────────────────────────────────────
     # Ads → GA4

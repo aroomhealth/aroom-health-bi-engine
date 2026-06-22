@@ -7,138 +7,52 @@
     <mxCell id="0"/>
     <mxCell id="1" parent="0"/>
     <mxCell id="2" value="LAYER 1 — FRONTEND (Comportamento Digital)" style="swimlane;startSize=30;fillColor=#1a2744;strokeColor=#3b82f6;fontColor=#ffffff;fontSize=13;fontStyle=1;swimlaneLine=1;strokeWidth=2;rounded=1;" parent="1" vertex="1" edge="0" >
-      <mxGeometry x="30" y="40" width="1300" height="320" as="geometry"/>
+      <mxGeometry x="30" y="40" width="1500" height="380" as="geometry"/>
     </mxCell>
     <mxCell id="3" value="LAYER 2 — BACKEND / E-COMMERCE (Nuvemshop + Checkout)" style="swimlane;startSize=30;fillColor=#0f2b2b;strokeColor=#14b8a6;fontColor=#ffffff;fontSize=13;fontStyle=1;swimlaneLine=1;strokeWidth=2;rounded=1;" parent="1" vertex="1" edge="0" >
-      <mxGeometry x="30" y="400" width="1300" height="220" as="geometry"/>
+      <mxGeometry x="30" y="460" width="1500" height="280" as="geometry"/>
     </mxCell>
     <mxCell id="4" value="LAYER 3 — BLING ERP (Fonte de Verdade | R$ 9.538.019)" style="swimlane;startSize=30;fillColor=#0f2b1a;strokeColor=#22c55e;fontColor=#ffffff;fontSize=13;fontStyle=1;swimlaneLine=1;strokeWidth=2;rounded=1;" parent="1" vertex="1" edge="0" >
-      <mxGeometry x="30" y="660" width="1300" height="300" as="geometry"/>
+      <mxGeometry x="30" y="790" width="1500" height="380" as="geometry"/>
     </mxCell>
-    <mxCell id="5" value="Google / Meta Ads
-UTM params →" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f59e0b;strokeColor=#d97706;fontColor=#000000;fontSize=11;fontStyle=1;align=center;" parent="2" vertex="1" edge="0" >
-      <mxGeometry x="60" y="50" width="160" height="60" as="geometry"/>
+    <mxCell id="5" value="Google / Meta Ads&#xa;UTM params →" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f59e0b;strokeColor=#d97706;fontColor=#000000;fontSize=11;fontStyle=1;align=center;" parent="2" vertex="1" edge="0" >
+      <mxGeometry x="60" y="50" width="180" height="70" as="geometry"/>
     </mxCell>
-    <mxCell id="6" value="GA4 events_YYYYMMDD
-─────────────────────
-event_name
-user_pseudo_id
-traffic_source.source
-traffic_source.medium
-event_params[transaction_id]
-─────────────────────
-185.602 eventos | 18 dias
-266 purchase | 17.881 sessions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d4ed8;strokeColor=#3b82f6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="2" vertex="1" edge="0" >
-      <mxGeometry x="250" y="40" width="260" height="200" as="geometry"/>
+    <mxCell id="6" value="GA4 events_YYYYMMDD&#xa;─────────────────────&#xa;event_name&#xa;user_pseudo_id&#xa;traffic_source.source&#xa;traffic_source.medium&#xa;event_params[transaction_id]&#xa;─────────────────────&#xa;185.602 eventos | 18 dias&#xa;266 purchase | 17.881 sessions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1d4ed8;strokeColor=#3b82f6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="2" vertex="1" edge="0" >
+      <mxGeometry x="280" y="40" width="300" height="220" as="geometry"/>
     </mxCell>
     <mxCell id="7" value="page_view  →  view_item  →  add_to_cart  →  begin_checkout  →  PURCHASE ✓" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#166534;strokeColor=#22c55e;fontColor=#ffffff;fontSize=10;align=center;fontStyle=1;" parent="2" vertex="1" edge="0" >
-      <mxGeometry x="250" y="255" width="540" height="40" as="geometry"/>
+      <mxGeometry x="280" y="275" width="580" height="50" as="geometry"/>
     </mxCell>
-    <mxCell id="8" value="perfit_campaign_actions
-─────────────────────
-campaign_id
-action_type (SENT/OPEN/CLICK)
-contact_email  ← bridge
-action_at
-─────────────────────
-297.434 eventos | 6.656 emails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5b21b6;strokeColor=#8b5cf6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="2" vertex="1" edge="0" >
-      <mxGeometry x="850" y="40" width="210" height="160" as="geometry"/>
+    <mxCell id="8" value="perfit_campaign_actions&#xa;─────────────────────&#xa;campaign_id&#xa;action_type (SENT/OPEN/CLICK)&#xa;contact_email  ← bridge&#xa;action_at&#xa;─────────────────────&#xa;297.434 eventos | 6.656 emails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5b21b6;strokeColor=#8b5cf6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="2" vertex="1" edge="0" >
+      <mxGeometry x="950" y="40" width="250" height="190" as="geometry"/>
     </mxCell>
-    <mxCell id="9" value="dispatch_send_log
-─────────────────────
-contact_id  ← FK direta
-rule_tag (aniversario, etc)
-anchor_date | sent_at
-─────────────────────
-22.376 envios | 4 automações" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5b21b6;strokeColor=#8b5cf6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="2" vertex="1" edge="0" >
-      <mxGeometry x="1075" y="40" width="200" height="160" as="geometry"/>
+    <mxCell id="9" value="dispatch_send_log&#xa;─────────────────────&#xa;contact_id  ← FK direta&#xa;rule_tag (aniversario, etc)&#xa;anchor_date | sent_at&#xa;─────────────────────&#xa;22.376 envios | 4 automações" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5b21b6;strokeColor=#8b5cf6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="2" vertex="1" edge="0" >
+      <mxGeometry x="1220" y="40" width="240" height="190" as="geometry"/>
     </mxCell>
-    <mxCell id="10" value="checkout
-─────────────────────
-token  ← bridge
-contact_email  ← bridge
-store_id
-contact_identification
-─────────────────────
-2.568 carrinhos | 2.294 emails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d4b4b;strokeColor=#14b8a6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="3" vertex="1" edge="0" >
-      <mxGeometry x="60" y="50" width="230" height="160" as="geometry"/>
+    <mxCell id="10" value="checkout&#xa;─────────────────────&#xa;token  ← bridge&#xa;contact_email  ← bridge&#xa;store_id&#xa;contact_identification&#xa;─────────────────────&#xa;2.568 carrinhos | 2.294 emails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d4b4b;strokeColor=#14b8a6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="3" vertex="1" edge="0" >
+      <mxGeometry x="60" y="50" width="270" height="210" as="geometry"/>
     </mxCell>
-    <mxCell id="11" value="nuvemshop_pedidos
-─────────────────────
-token  ← bridge
-store_id  ← bridge Bling
-customer_id
-contact_email
-payment_status
-fulfillment_status
-─────────────────────
-19.915 pedidos | 16.882 clientes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d4b4b;strokeColor=#14b8a6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="3" vertex="1" edge="0" >
-      <mxGeometry x="340" y="50" width="240" height="160" as="geometry"/>
+    <mxCell id="11" value="nuvemshop_pedidos&#xa;─────────────────────&#xa;token  ← bridge&#xa;store_id  ← bridge Bling&#xa;customer_id&#xa;contact_email&#xa;payment_status&#xa;fulfillment_status&#xa;─────────────────────&#xa;19.915 pedidos | 16.882 clientes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d4b4b;strokeColor=#14b8a6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="3" vertex="1" edge="0" >
+      <mxGeometry x="380" y="50" width="280" height="220" as="geometry"/>
     </mxCell>
-    <mxCell id="12" value="nuvemshop_pedido_produto
-─────────────────────
-pedido_id  FK
-sku | name
-quantity | price
-─────────────────────
-48.690 itens" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d4b4b;strokeColor=#14b8a6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="3" vertex="1" edge="0" >
-      <mxGeometry x="640" y="50" width="210" height="130" as="geometry"/>
+    <mxCell id="12" value="nuvemshop_pedido_produto&#xa;─────────────────────&#xa;pedido_id  FK&#xa;sku | name&#xa;quantity | price&#xa;─────────────────────&#xa;48.690 itens" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d4b4b;strokeColor=#14b8a6;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="3" vertex="1" edge="0" >
+      <mxGeometry x="710" y="50" width="250" height="170" as="geometry"/>
     </mxCell>
-    <mxCell id="13" value="pedidos_vendas
-─────────────────────
-identificador  PK
-numero  ← transactionId
-loja_id  FK → canais_venda
-contato_id  FK → contato
-nota_fiscal_id  FK
-data | total
-─────────────────────
-130.135 pedidos
-R$ 9.538.019 (fonte de verdade)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;fontSize=11;align=left;verticalAlign=top;fontStyle=1;strokeWidth=2;" parent="4" vertex="1" edge="0" >
-      <mxGeometry x="60" y="50" width="240" height="230" as="geometry"/>
+    <mxCell id="13" value="pedidos_vendas&#xa;─────────────────────&#xa;identificador  PK&#xa;numero  ← transactionId&#xa;loja_id  FK → canais_venda&#xa;contato_id  FK → contato&#xa;nota_fiscal_id  FK&#xa;data | total&#xa;─────────────────────&#xa;130.135 pedidos&#xa;R$ 9.538.019 (fonte de verdade)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;fontSize=11;align=left;verticalAlign=top;fontStyle=1;strokeWidth=2;" parent="4" vertex="1" edge="0" >
+      <mxGeometry x="60" y="50" width="280" height="270" as="geometry"/>
     </mxCell>
-    <mxCell id="14" value="pedidos_vendas_itens
-─────────────────────
-pedidos_vendas_identificador  FK
-codigo  FK → produtos
-descricao | quantidade
-valor
-─────────────────────
-187.875 itens
-R$ 9.054.613" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="4" vertex="1" edge="0" >
-      <mxGeometry x="360" y="50" width="230" height="180" as="geometry"/>
+    <mxCell id="14" value="pedidos_vendas_itens&#xa;─────────────────────&#xa;pedidos_vendas_identificador  FK&#xa;codigo  FK → produtos&#xa;descricao | quantidade&#xa;valor&#xa;─────────────────────&#xa;187.875 itens&#xa;R$ 9.054.613" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="4" vertex="1" edge="0" >
+      <mxGeometry x="400" y="50" width="270" height="210" as="geometry"/>
     </mxCell>
-    <mxCell id="15" value="produtos
-─────────────────────
-identificador  PK
-codigo  PK
-nome | situacao
-preco
-─────────────────────
-9.751 total | 1.730 ativos
-⚠️ 510 SKUs faltantes
-(R$ 95.170 sem cadastro)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7c2d12;strokeColor=#f97316;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="4" vertex="1" edge="0" >
-      <mxGeometry x="650" y="50" width="220" height="180" as="geometry"/>
+    <mxCell id="15" value="produtos&#xa;─────────────────────&#xa;identificador  PK&#xa;codigo  PK&#xa;nome | situacao&#xa;preco&#xa;─────────────────────&#xa;9.751 total | 1.730 ativos&#xa;⚠️ 510 SKUs faltantes&#xa;(R$ 95.170 sem cadastro)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7c2d12;strokeColor=#f97316;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="4" vertex="1" edge="0" >
+      <mxGeometry x="730" y="50" width="260" height="210" as="geometry"/>
     </mxCell>
-    <mxCell id="16" value="contato
-─────────────────────
-identificador  PK
-email  ← bridge email
-nome
-numero_documento
-─────────────────────
-120.479 clientes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="4" vertex="1" edge="0" >
-      <mxGeometry x="360" y="250" width="200" height="150" as="geometry"/>
+    <mxCell id="16" value="contato&#xa;─────────────────────&#xa;identificador  PK&#xa;email  ← bridge email&#xa;nome&#xa;numero_documento&#xa;─────────────────────&#xa;120.479 clientes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="4" vertex="1" edge="0" >
+      <mxGeometry x="400" y="290" width="270" height="180" as="geometry"/>
     </mxCell>
-    <mxCell id="17" value="notas_fiscais_saida
-─────────────────────
-identificador  PK
-numero NF
-data_emissao
-loja_id
-─────────────────────
-73.286 notas fiscais" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="4" vertex="1" edge="0" >
-      <mxGeometry x="650" y="250" width="200" height="150" as="geometry"/>
+    <mxCell id="17" value="notas_fiscais_saida&#xa;─────────────────────&#xa;identificador  PK&#xa;numero NF&#xa;data_emissao&#xa;loja_id&#xa;─────────────────────&#xa;73.286 notas fiscais" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#14532d;strokeColor=#22c55e;fontColor=#ffffff;fontSize=10;align=left;verticalAlign=top;" parent="4" vertex="1" edge="0" >
+      <mxGeometry x="730" y="290" width="260" height="180" as="geometry"/>
     </mxCell>
     <mxCell id="18" value="UTM params" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#f59e0b;strokeWidth=2;fontColor=#f59e0b;fontSize=9;fontStyle=1;" parent="2" source="5" target="6" edge="1">
       <mxGeometry relative="1" as="geometry"/>
@@ -155,57 +69,38 @@ loja_id
     <mxCell id="22" value="id → pedido_id" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="3" source="11" target="12" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="23" value="pv.identificador
-= pvi.pedidos_vendas_identificador" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="4" source="13" target="14" edge="1">
+    <mxCell id="23" value="pv.identificador&#xa;= pvi.pedidos_vendas_identificador" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="4" source="13" target="14" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="24" value="pvi.codigo
-= produtos.codigo
-⚠️ 510 SKUs faltantes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="4" source="14" target="15" edge="1">
+    <mxCell id="24" value="pvi.codigo&#xa;= produtos.codigo&#xa;⚠️ 510 SKUs faltantes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="4" source="14" target="15" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="25" value="pv.contato_id
-→ contato.identificador
-🔴 0% join (schema mismatch)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="4" source="13" target="16" edge="1">
+    <mxCell id="25" value="pv.contato_id&#xa;→ contato.identificador&#xa;🔴 0% join (schema mismatch)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="4" source="13" target="16" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="26" value="pv.nota_fiscal_id
-= nf.identificador
-✓ 99.99%" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="4" source="13" target="17" edge="1">
+    <mxCell id="26" value="pv.nota_fiscal_id&#xa;= nf.identificador&#xa;✓ 99.99%" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontColor=#ffffff;fontSize=9;" parent="4" source="13" target="17" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="27" value="GA4.event_params[transaction_id]
-= pedidos_vendas.numero
-⚠️ MÉDIA · 20.5% cobertura" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="6" target="13" edge="1">
+    <mxCell id="27" value="GA4.event_params[transaction_id]&#xa;= pedidos_vendas.numero&#xa;⚠️ MÉDIA · 20.5% cobertura" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="6" target="13" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="28" value="nuvemshop_pedidos.store_id
-= pedidos_vendas.loja_id
-✓ ALTA · R$ 2.85M" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;dashed=0;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="11" target="13" edge="1">
+    <mxCell id="28" value="nuvemshop_pedidos.store_id&#xa;= pedidos_vendas.loja_id&#xa;✓ ALTA · R$ 2.85M" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;dashed=0;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="11" target="13" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="29" value="perfit.contact_email
-= contato.email
-✓ ALTA · 75% · 4.994 clientes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;dashed=0;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="8" target="16" edge="1">
+    <mxCell id="29" value="perfit.contact_email&#xa;= contato.email&#xa;✓ ALTA · 75% · 4.994 clientes" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;dashed=0;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="8" target="16" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="30" value="dispatch_send_log.contact_id
-= contato.identificador
-✓ ALTA · 100% · FK direta" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;dashed=0;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="9" target="16" edge="1">
+    <mxCell id="30" value="dispatch_send_log.contact_id&#xa;= contato.identificador&#xa;✓ ALTA · 100% · FK direta" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;dashed=0;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="9" target="16" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="31" value="checkout.contact_email
-= contato.email
-✓ ALTA · 64.7% fill" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;dashed=0;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="10" target="16" edge="1">
+    <mxCell id="31" value="checkout.contact_email&#xa;= contato.email&#xa;✓ ALTA · 64.7% fill" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#22c55e;strokeWidth=2;dashed=0;fontColor=#22c55e;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="10" target="16" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
-    <mxCell id="32" value="checkout.token
-= nuvemshop_pedidos.token
-⚠️ MÉDIA · 12.5% converte" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="6" target="11" edge="1">
+    <mxCell id="32" value="checkout.token&#xa;= nuvemshop_pedidos.token&#xa;⚠️ MÉDIA · 12.5% converte" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#f59e0b;strokeWidth=2;dashed=1;dashPattern=8 4;fontColor=#f59e0b;fontSize=9;fontStyle=1;endArrow=block;endFill=1;" parent="1" source="6" target="11" edge="1">
       <mxGeometry relative="1" as="geometry"/>
     </mxCell>
     <mxCell id="33" value="&lt;b&gt;Legenda de Confiança das Pontes:&lt;/b&gt;&lt;br/&gt;── Verde sólida → ALTA confiança (FK nativa ou match &gt;70%)&lt;br/&gt;── Amarela tracejada → MÉDIA confiança (cobertura parcial ou não validado)&lt;br/&gt;⚠️ Laranja → SKU faltante (510 SKUs / R$ 95.170 sem cadastro no produtos)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;fontColor=#ffffff;fontSize=11;" parent="1" vertex="1" edge="0" >
-      <mxGeometry x="30" y="980" width="1300" height="60" as="geometry"/>
+      <mxGeometry x="30" y="1190" width="1500" height="60" as="geometry"/>
     </mxCell>
 
   </root>
