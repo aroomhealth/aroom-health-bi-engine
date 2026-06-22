@@ -130,7 +130,10 @@ base_limpa AS (
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'essencial|olíbano|olibano') THEN 'Óleos Essenciais'
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'argila') THEN 'Argila'
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'tônico|tonico|t.nico') THEN 'Tônicos Capilares'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'shampoo|condicionador|máscara|mascara') THEN 'Shampoos'
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'aloe vera') THEN 'Gel Aloe Vera'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'hidrolato') THEN 'Hidrolatos'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'cílio|cilio|sobrancelha') THEN 'Óleos Para Cílios E Sobrancelhas'
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'sérum|serum|rejuvenescedor|creme|ozonizado') THEN 'Estética e Beleza'
                     ELSE COALESCE(cat.categoria_produto, 'Sem Categoria')
                 END
@@ -147,7 +150,10 @@ base_limpa AS (
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'essencial|olíbano|olibano') THEN 'Óleos Essenciais'
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'argila') THEN 'Argila'
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'tônico|tonico|t.nico') THEN 'Tônicos Capilares'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'shampoo|condicionador|máscara|mascara') THEN 'Shampoos'
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'aloe vera') THEN 'Gel Aloe Vera'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'hidrolato') THEN 'Hidrolatos'
+                    WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'cílio|cilio|sobrancelha') THEN 'Óleos Para Cílios E Sobrancelhas'
                     WHEN REGEXP_CONTAINS(LOWER(COALESCE(prod.nome, i.descricao)), r'sérum|serum|rejuvenescedor|creme|ozonizado') THEN 'Estética e Beleza'
                     ELSE COALESCE(cat.subcategoria_produto, 'Sem Categoria')
                 END
