@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" modified="2026-06-17T18:00:00.000Z" agent="Antigravity AI Assistant" version="21.0.0" type="device">
+  <diagram id="aroom_health_architecture" name="Arquitetura Aroom Health BI">
+    <mxGraphModel dx="1800" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title_box" value="&lt;b&gt;&lt;font style='font-size: 22px' color='#0F172A'&gt;DIAGRAMA DE ARQUITETURA DE DADOS COMPLETO - AROOM HEALTH BI&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size: 13px' color='#64748B'&gt;Mapeamento de ponta a ponta: Origens, Ingestão Raw, Transformação Semântica, Consumo BI/CRM, Infraestrutura (IaC/dbt) e Validação de Dados.&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_sources" value="FONTES DE ORIGEM (SISTEMAS)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="220" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_raw" value="BIGQUERY: DATASET RAW (database_aroom_health)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="100" width="340" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_curated" value="BIGQUERY: DATASET CURATED (customer_intelligence)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="680" y="100" width="380" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_others" value="BIGQUERY: OUTROS DATASETS (MARKETING / AUDIT)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="100" width="300" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_consumers" value="CAMADA DE CONSUMO (BI / CRM)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="100" width="240" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="src_ibge" value="🌍 &lt;b&gt;IBGE &amp; Dados Públicos&lt;/b&gt;&lt;br/&gt;Arquivos Municipais&lt;br/&gt;(Socioeconômico / UF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F1F5F9;strokeColor=#64748B;strokeWidth=1.5;fontColor=#334155;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="src_bling" value="📦 &lt;b&gt;Bling ERP&lt;/b&gt;&lt;br/&gt;Webhooks &amp; API&lt;br/&gt;(Faturamento e Logística)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;strokeWidth=2;fontColor=#0369A1;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="250" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="src_ga4" value="📈 &lt;b&gt;Google Analytics 4&lt;/b&gt;&lt;br/&gt;Export Nativo Integrado&lt;br/&gt;(Sessões &amp; Tráfego)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;strokeWidth=2;fontColor=#0369A1;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="480" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="src_gads" value="📢 &lt;b&gt;Google Ads API&lt;/b&gt;&lt;br/&gt;Mídia Paga (Campanhas)&lt;br/&gt;&lt;font color='#DC2626'&gt;&lt;b&gt;INTEGRAÇÃO QUEBRADA&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=2;fontColor=#991B1B;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="650" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="src_ga4_api" value="🐍 &lt;b&gt;GA4 Data API&lt;/b&gt;&lt;br/&gt;Consultas Python SDK&lt;br/&gt;(Recuperação Histórica)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=2;fontColor=#15803D;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="780" width="180" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_grp_bling" value="&lt;b&gt;TABELAS BRUTAS: BLING ERP&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=1;align=center;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#475569;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="315" y="140" width="310" height="315" as="geometry" />
+        </mxCell>
+        <mxCell id="t_pv" value="📄 &lt;b&gt;pedidos_vendas&lt;/b&gt; (Headers)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1.5;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="175" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t_pvi" value="⚠️ &lt;b&gt;pedidos_vendas_itens&lt;/b&gt; (SKUs)&lt;br/&gt;&lt;font color='#D97706'&gt;▲ Duplicados (Impacto R$ 45k)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=1.5;fontColor=#B45309;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="225" width="280" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="t_pvt" value="📄 &lt;b&gt;pedidos_vendas_transporte&lt;/b&gt; (Fretes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1.5;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="280" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t_prod" value="📄 &lt;b&gt;produtos&lt;/b&gt; (Cadastro e Custos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1.5;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="330" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t_bling_canais" value="📄 &lt;b&gt;bling_canais_venda&lt;/b&gt; (Lookup de Canais)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1.5;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="385" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_grp_ga4" value="&lt;b&gt;TABELAS BRUTAS: GA4&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=1;align=center;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#475569;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="315" y="470" width="310" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="t_ga_utm" value="📄 &lt;b&gt;google_analytics_utm_daily&lt;/b&gt; (UTMs Consolidadas)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1.5;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="505" width="280" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t_ga_dummy" value="&lt;i&gt;Tráfego consolidado no grão diário&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=1;fontColor=#64748B;fontSize=10;fontStyle=2;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="555" width="280" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_grp_gads" value="&lt;b&gt;TABELAS BRUTAS: GOOGLE ADS&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#CBD5E1;strokeWidth=1;align=center;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#475569;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="315" y="605" width="310" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="t_gads_frozen" value="🚨 &lt;b&gt;google_ads_campaign_performance&lt;/b&gt;&lt;br/&gt;&lt;font color='#DC2626'&gt;&lt;b&gt;FROZEN - Desde 12/12/2025&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=1.5;fontColor='#991B1B';fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="640" width="280" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="t_gads_dts" value="✨ &lt;b&gt;google_ads_campaign_performance_v2&lt;/b&gt;&lt;br/&gt;&lt;font color='#2563EB'&gt;★ Proposto (Transferencia DTS e Backfill)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;strokeWidth=2;dashed=1;fontColor=#1D4ED8;fontSize=10;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="330" y="705" width="280" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="t_cpe" value="👤 &lt;b&gt;customer_profile_enriched&lt;/b&gt;&lt;br/&gt;Perfis de clientes enriquecidos&lt;br/&gt;(UF, CEP, Renda Média Setor, Distância CD)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1.5;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="700" y="140" width="340" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="t_rfm" value="🧠 &lt;b&gt;customer_rfm&lt;/b&gt;&lt;br/&gt;Segmentação RFM de clientes (IA)&lt;br/&gt;&lt;font color='#16A34A'&gt;● Ativo (D-1)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1.5;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="700" y="215" width="340" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="t_pred" value="🧠 &lt;b&gt;customer_predictions&lt;/b&gt;&lt;br/&gt;Previsões de LTV e Churn de clientes (IA)&lt;br/&gt;&lt;font color='#16A34A'&gt;● Ativo (D-1)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1.5;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="700" y="275" width="340" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="v_gevd" value="💎 &lt;b&gt;growth_engine_vendas_detalhado&lt;/b&gt;&lt;br/&gt;&lt;font color='#1D4ED8'&gt;&lt;b&gt;VIEW DE NEGÓCIO PRINCIPAL (PROD)&lt;/b&gt;&lt;/font&gt;&lt;br/&gt;&lt;i&gt;Faturamento Auditado: R$ 9.540.041,07&lt;/i&gt;&lt;br/&gt;• Rateio proporcional de frete e custos por item&lt;br/&gt;• SmartMetrics Dimensions (Família, Objetivo, Etapa)&lt;br/&gt;• Fallback inteligente via IA para categorias vazias" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;strokeWidth=2.5;fontColor=#1D4ED8;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="350" width="340" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="v_gemvc" value="✨ &lt;b&gt;growth_engine_mkt_vendas_consolidado&lt;/b&gt;&lt;br/&gt;&lt;font color='#D97706'&gt;&lt;b&gt;VIEW SEMÂNTICA UNIFICADA (Roadmap)&lt;/b&gt;&lt;/font&gt;&lt;br/&gt;• Une Vendas Detalhadas + Origens de Marketing&lt;br/&gt;• Regex de UTMs nas obs. do Bling e GA4 UTMs&lt;br/&gt;• Consolida custos diários de Google Ads DTS&lt;br/&gt;• Calcula Lucro Líquido e ROAS por SKU &amp; Campanha" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=2.5;dashed=1;fontColor=#B45309;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="700" y="560" width="340" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_gads_internal" value="dataset: google_ads (Frozen)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#94A3B8;strokeWidth=1;dashed=1;align=center;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="140" width="280" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="t_ads_internal" value="ads_CampaignBasicStats_...&lt;br/&gt;ads_AdStats_...&lt;br/&gt;ads_Budget_...&lt;br/&gt;&lt;font color='#DC2626'&gt;&lt;b&gt;FROZEN - Desde 12/12/2025&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=1;fontColor=#991B1B;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="180" width="260" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_ga4_internal" value="dataset: analytics_414017556" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#94A3B8;strokeWidth=1;dashed=1;align=center;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="340" width="280" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="t_ga4_sharded" value="📄 &lt;b&gt;events_YYYYMMDD&lt;/b&gt;&lt;br/&gt;Tabelas brutas GA4 por dia&lt;br/&gt;(Export Firebase nativo)&lt;br/&gt;&lt;font color='#16A34A'&gt;● Ativo (D-1)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="380" width="260" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_recovery_internal" value="dataset: analytics_recovery" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#94A3B8;strokeWidth=1;dashed=1;align=center;verticalAlign=top;fontStyle=1;fontSize=12;fontColor=#475569;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="540" width="280" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="t_ga4_rec_tables" value="📄 &lt;b&gt;ga4_recovery_traffic_sources&lt;/b&gt;&lt;br/&gt;ga4_recovery_ecommerce&lt;br/&gt;ga4_recovery_pages / geo / devices&lt;br/&gt;&lt;i&gt;(Tabelas consolidadas via API)&lt;/i&gt;&lt;br/&gt;&lt;font color='#16A34A'&gt;● Recuperado e Atualizado&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=1;fontColor=#16A34A;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="580" width="260" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="vis_looker_faturamento" value="📊 &lt;b&gt;Looker Studio Dashboard&lt;/b&gt;&lt;br/&gt;Faturamento e SmartMetrics&lt;br/&gt;&lt;font color='#16A34A'&gt;● &lt;b&gt;CONFIÁVEL&lt;/b&gt; bate faturamento&lt;/font&gt;&lt;br/&gt;Fonte: growth_engine_vendas_detalhado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=2;fontColor=#16A34A;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="150" width="200" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="vis_looker_mkt" value="📊 &lt;b&gt;Looker Studio Dashboard&lt;/b&gt;&lt;br/&gt;Mídia e Campanhas (CAC/ROAS)&lt;br/&gt;&lt;font color='#DC2626'&gt;▲ &lt;b&gt;DESATUALIZADO (CONGELADO)&lt;/b&gt;&lt;/font&gt;&lt;br/&gt;Fonte: google_ads_campaign_performance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=2;fontColor=#991B1B;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="260" width="200" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="vis_looker_mkt_new" value="📊 &lt;b&gt;Looker Studio Dashboard&lt;/b&gt;&lt;br/&gt;&lt;b&gt;Novo Dashboard ROAS Real&lt;/b&gt;&lt;br/&gt;&lt;font color='#2563EB'&gt;★ Planejado (DRE/Mkt)&lt;/font&gt;&lt;br/&gt;Fonte: growth_engine_mkt_vendas_consolidado" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;strokeWidth=2;dashed=1;fontColor=#1D4ED8;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="370" width="200" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="vis_crm" value="✉️ &lt;b&gt;ActiveCampaign / CRM&lt;/b&gt;&lt;br/&gt;Automação e Réguas de Email&lt;br/&gt;Segmentações LTV &amp; RFM&lt;br/&gt;&lt;font color='#16A34A'&gt;● Ativo&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F0FDF4;strokeColor=#22C55E;strokeWidth=2;fontColor=#16A34A;fontSize=12;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="480" width="200" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_devops" value="🛠️ ORQUESTRAÇÃO &amp; INFRAESTRUTURA (DEVOPS)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="900" width="600" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="inf_tf" value="⚙️ &lt;b&gt;Terraform IaC&lt;/b&gt;&lt;br/&gt;Provisionamento de Datasets BigQuery&lt;br/&gt;e controle de acessos (IAM GCP)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF5FF;strokeColor=#A855F7;strokeWidth=1.5;fontColor=#6B21A8;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="940" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="inf_dbt" value="⚙️ &lt;b&gt;dbt / Dataform&lt;/b&gt;&lt;br/&gt;Orquestração de views e tabelas&lt;br/&gt;(Semântica, staging e marts analíticos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF5FF;strokeColor=#A855F7;strokeWidth=1.5;fontColor=#6B21A8;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="340" y="940" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_quality" value="🛡️ MONITORAMENTO, QUALIDADE &amp; AUDITORIA DE DADOS" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="680" y="900" width="1000" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="mon_fresh" value="🛡️ &lt;b&gt;Freshness Validation Checks&lt;/b&gt;&lt;br/&gt;Scripts de monitoramento de atrasos&lt;br/&gt;(Bling D-1 / Google Ads alerts)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#10B981;strokeWidth=1.5;fontColor=#065F46;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="700" y="940" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="mon_rev" value="🛡️ &lt;b&gt;Revenue Integrity Auditor&lt;/b&gt;&lt;br/&gt;Validações de faturamento diário (R$ 9.54M)&lt;br/&gt;e alertas de duplicidades e nulos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#10B981;strokeWidth=1.5;fontColor=#065F46;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="940" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="mon_alerts" value="📣 &lt;b&gt;Quality Alerts (PubSub/Slack)&lt;/b&gt;&lt;br/&gt;Notificações automáticas de falhas de&lt;br/&gt;pipeline ou dados corrompidos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#10B981;strokeWidth=1.5;fontColor=#065F46;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="940" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_box" value="&lt;b&gt;LEGENDA &amp; STATUS DO ECOSSISTEMA&lt;/b&gt;&lt;br/&gt;• &lt;font color='#16A34A'&gt;&lt;b&gt;Verde (Saudável / Ativo):&lt;/b&gt;&lt;/font&gt; Ingestões diárias funcionando perfeitamente sem problemas de integridade detectados.&lt;br/&gt;• &lt;font color='#D97706'&gt;&lt;b&gt;Amarelo (Atenção / Duplicidade):&lt;/b&gt;&lt;/font&gt; Tabela/View funcionando, porém com riscos conhecidos de fan-out ou duplicações físicas a serem saneadas.&lt;br/&gt;• &lt;font color='#DC2626'&gt;&lt;b&gt;Vermelho (Quebrado / Congelado):&lt;/b&gt;&lt;/font&gt; Pipeline inativo desde 12/12/2025. Dados estáticos e dashboards de marketing corrompidos.&lt;br/&gt;• &lt;font color='#2563EB'&gt;&lt;b&gt;Azul Pontilhado (Planejado / Roadmap):&lt;/b&gt;&lt;/font&gt; Camadas de dados, ferramentas (DTS) e views propostas no plano de recuperação e atribuição de ROAS.&lt;br/&gt;• &lt;font color='#6B21A8'&gt;&lt;b&gt;Roxo (Orquestração / IaC):&lt;/b&gt;&lt;/font&gt; Camada de governança e controle de recursos (Terraform / dbt).&lt;br/&gt;&lt;i&gt;Instruções de Edição: Para alterar este diagrama, abra-o no site &lt;b&gt;draw.io&lt;/b&gt; (File &amp;gt; Open From &amp;gt; Device...) ou arraste e solte o arquivo &lt;b&gt;aroom_health_architecture.drawio&lt;/b&gt; na tela do draw.io.&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#E2E8F0;strokeWidth=2;align=left;spacingLeft=15;fontSize=12;fontColor=#334155;fontFamily=Helvetica;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1090" width="1640" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="e_src_bling_grp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="src_bling" target="sub_grp_bling">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_src_ga4_grp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="src_ga4" target="sub_grp_ga4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_src_gads_frozen" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EF4444;strokeWidth=2;dashed=1;" edge="1" parent="1" source="src_gads" target="t_gads_frozen">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_src_gads_new" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B82F6;strokeWidth=2;dashed=1;" edge="1" parent="1" source="src_gads" target="t_gads_dts">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_src_ibge_cpe" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="src_ibge" target="t_cpe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_src_ga4api_rec" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="src_ga4_api" target="grp_recovery_internal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_raw_bling_gevd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="sub_grp_bling" target="v_gevd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cpe_gevd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="t_cpe" target="v_gevd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cpe_rfm" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="t_cpe" target="t_rfm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_rfm_pred" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="t_rfm" target="t_pred">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gads_old_stats" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EF4444;strokeWidth=2;dashed=1;" edge="1" parent="1" source="t_gads_frozen" target="t_ads_internal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ga4_raw_sharded" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="src_ga4" target="t_ga4_sharded">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gevd_gemvc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B82F6;strokeWidth=2;dashed=1;" edge="1" parent="1" source="v_gevd" target="v_gemvc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ga_utm_gemvc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B82F6;strokeWidth=2;dashed=1;" edge="1" parent="1" source="t_ga_utm" target="v_gemvc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gads_new_gemvc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B82F6;strokeWidth=2;dashed=1;" edge="1" parent="1" source="t_gads_dts" target="v_gemvc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ga4_rec_gemvc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B82F6;strokeWidth=2;dashed=1;" edge="1" parent="1" source="t_ga4_rec_tables" target="v_gemvc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gevd_looker" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="v_gevd" target="vis_looker_faturamento">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ads_old_looker" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#EF4444;strokeWidth=2;dashed=1;" edge="1" parent="1" source="t_ads_internal" target="vis_looker_mkt">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gemvc_looker_new" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#3B82F6;strokeWidth=2;dashed=1;" edge="1" parent="1" source="v_gemvc" target="vis_looker_mkt_new">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_rfm_crm" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="t_rfm" target="vis_crm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pred_crm" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=1.5;" edge="1" parent="1" source="t_pred" target="vis_crm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_inf_tf_raw" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#A855F7;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="inf_tf" target="grp_raw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_inf_dbt_cur" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#A855F7;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="inf_dbt" target="grp_curated">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mon_fresh_pv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#10B981;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="mon_fresh" target="t_pv">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mon_rev_gevd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#10B981;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="mon_rev" target="v_gevd">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

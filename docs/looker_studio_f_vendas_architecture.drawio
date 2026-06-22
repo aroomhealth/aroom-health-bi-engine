@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" modified="2026-06-17T18:00:00.000Z" agent="Antigravity AI Assistant" version="21.0.0" type="device">
+  <diagram id="f_vendas_governance_process" name="Processo f_vendas (growth_engine_vendas_detalhado)">
+    <mxGraphModel dx="1600" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title_box" value="&lt;b&gt;&lt;font style='font-size: 20px' color='#0F172A'&gt;RELAÇÃO ENTRE VIEW LÓGICA E TABELA FÍSICA (f_vendas / Fato)&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size: 13px' color='#64748B'&gt;Como a view lógica &lt;b&gt;growth_engine_vendas_detalhado&lt;/b&gt; se materializa na tabela fato física &lt;b&gt;f_vendas&lt;/b&gt; para otimizar custos e performance no Looker.&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=0;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="1100" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_raw" value="DADOS DE ORIGEM BRUTOS (Bling ERP / 2026)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="280" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_view" value="REGRAS DE TRANSFORMAÇÃO (VIEW LÓGICA vs TABELA FISICA)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="360" y="100" width="680" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="grp_looker" value="CAMADA DE CONSUMO (LOOKER STUDIO)" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 8;fillColor=none;strokeColor=#475569;strokeWidth=2;align=center;verticalAlign=top;fontStyle=1;fontSize=14;fontColor=#1E293B;fontFamily=Helvetica;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="100" width="280" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="r_pv" value="📄 &lt;b&gt;pedidos_vendas (Bling)&lt;/b&gt;&lt;br/&gt;• Apenas vendas de 2026&lt;br/&gt;• Status cancelados misturados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=1.5;fontColor=#B45309;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="140" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_pvi" value="⚠️ &lt;b&gt;pedidos_vendas_itens (Bling)&lt;/b&gt;&lt;br/&gt;• &lt;b&gt;895 duplicatas físicas&lt;/b&gt;&lt;br/&gt;• SKUs faturados em 2026" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#EF4444;strokeWidth=1.5;fontColor=#991B1B;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="230" width="260" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="r_pvt" value="📄 &lt;b&gt;pedidos_vendas_transporte&lt;/b&gt;&lt;br/&gt;• Fretes cobrados em 2026&lt;br/&gt;• Risco de fan-out no join" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=1.5;fontColor=#B45309;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="325" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_prod" value="📄 &lt;b&gt;produtos (Catálogo)&lt;/b&gt;&lt;br/&gt;• Apenas ativos (situacao = 'A')&lt;br/&gt;• 91.1% dos custos unitários zerados" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFBEB;strokeColor=#D97706;strokeWidth=1.5;fontColor=#B45309;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="415" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="r_bc" value="📄 &lt;b&gt;bling_canais_venda&lt;/b&gt;&lt;br/&gt;• Canais de vendas do Bling" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF5FF;strokeColor=#C084FC;strokeWidth=1.5;fontColor=#581C87;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="505" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="r_cpe" value="👤 &lt;b&gt;customer_profile_enriched&lt;/b&gt;&lt;br/&gt;• Distância CD, CEP, Renda" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAF5FF;strokeColor=#C084FC;strokeWidth=1.5;fontColor=#581C87;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="585" width="260" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="v_logic" value="💎 &lt;b&gt;VIEW LÓGICA: growth_engine_vendas_detalhado&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;• Contém toda a lógica e regras SQL de negócio:&lt;br/&gt;  1. Filtra cancelados e ano 2026.&lt;br/&gt;  2. Deduplica itens via ROW_NUMBER().&lt;br/&gt;  3. Rateia frete proporcionalmente por item.&lt;br/&gt;  4. Categoriza por regex de IA produtos nulos.&lt;br/&gt;  5. Associa custos (COGS) de SKUs ativos ('A').&lt;br/&gt;  6. Enriquece com as 6 dimensões SmartMetrics." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFF6FF;strokeColor=#3B82F6;strokeWidth=2;fontColor=#1D4ED8;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="380" y="140" width="640" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="t_f_vendas" value="🗄️ &lt;b&gt;TABELA FÍSICA FATO: f_vendas (Marts)&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;• &lt;b&gt;Tabela Materializada Persistida diariamente (D-1)&lt;/b&gt; via dbt/scheduled queries.&lt;br/&gt;• Armazena os dados finais já processados e consolidados no grão de item.&lt;br/&gt;• &lt;b&gt;Benefício:&lt;/b&gt; Alta performance de carregamento e custo zero de execução de joins complexos no Looker Studio." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECFDF5;strokeColor=#10B981;strokeWidth=2.5;fontColor=#065F46;fontSize=12;fontFamily=Helvetica;align=left;spacingLeft=15;" vertex="1" parent="1">
+          <mxGeometry x="380" y="420" width="640" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="l_sales" value="📊 &lt;b&gt;Looker Studio: Dashboard&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;• Conectado a: &lt;b&gt;f_vendas&lt;/b&gt; (Tabela)&lt;br/&gt;• &lt;b&gt;Carregamento instantâneo&lt;/b&gt; de gráficos&lt;br/&gt;• Apenas produtos ativos e ano 2026&lt;br/&gt;• Sem re-execução de joins ou regex&lt;br/&gt;• Faturamento Auditado: R$ 9.54M" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2.5;fontColor=#1B5E20;fontSize=11;fontFamily=Helvetica;align=left;spacingLeft=15;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="385" width="240" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_box" value="&lt;b&gt;RELAÇÃO ENTRE CAMADA LÓGICA E FÍSICA DA FATO DE VENDAS&lt;/b&gt;&lt;br/&gt;• &lt;font color='#1D4ED8'&gt;&lt;b&gt;Azul (View Lógica / Transformação):&lt;/b&gt;&lt;/font&gt; Onde reside o código SQL complexo. Não deve ser lido diretamente pelo Looker Studio para evitar lentidão e custos.&lt;br/&gt;• &lt;font color='#065F46'&gt;&lt;b&gt;Verde Escuro (Tabela Física / Persistência):&lt;/b&gt;&lt;/font&gt; A fato materializada (Mart) que armazena os dados limpos fisicamente. Otimiza o desempenho do painel.&lt;br/&gt;• &lt;font color='#1B5E20'&gt;&lt;b&gt;Verde Claro (Looker Studio / Consumo):&lt;/b&gt;&lt;/font&gt; Camada de visualização apontando para a fato persistida f_vendas." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#E2E8F0;strokeWidth=2;align=left;spacingLeft=15;fontSize=12;fontColor=#334155;fontFamily=Helvetica;spacingTop=5;" vertex="1" parent="1">
+          <mxGeometry x="40" y="900" width="1320" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="er_pv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C084FC;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="r_pv" target="v_logic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="er_pvi" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C084FC;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="r_pvi" target="v_logic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="er_pvt" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C084FC;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="r_pvt" target="v_logic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="er_prod" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C084FC;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="r_prod" target="v_logic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="er_bc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C084FC;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="r_bc" target="v_logic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="er_cpe" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C084FC;strokeWidth=1.5;dashed=1;" edge="1" parent="1" source="r_cpe" target="v_logic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_materialize" value="Materialização diária (dbt run)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#10B981;strokeWidth=2.5;labelBackgroundColor=none;fontColor=#047857;" edge="1" parent="1" source="v_logic" target="t_f_vendas">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="el_looker" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;strokeWidth=2.5;" edge="1" parent="1" source="t_f_vendas" target="l_sales">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
