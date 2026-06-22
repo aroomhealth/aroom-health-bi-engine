@@ -17,7 +17,7 @@ Abrir no draw.io:
     3. Arraste o arquivo para a janela do draw.io
 """
 
-import textwrap
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # HELPERS
@@ -361,43 +361,52 @@ def build_diagram() -> str:
                             id_ns_ped, id_ns_prod, parent=id_sw_back))
 
     # pedidos_vendas → pedidos_vendas_itens
-    cells.append(edge_cell(new_id(), "identificador →", EDGE_INTERNAL,
-                            id_pv, id_pvi, parent=id_sw_bling))
+    cells.append(edge_cell(new_id(),
+                            "pv.identificador\n= pvi.pedidos_vendas_identificador",
+                            EDGE_INTERNAL, id_pv, id_pvi, parent=id_sw_bling))
     # pedidos_vendas_itens → produtos
-    cells.append(edge_cell(new_id(), "codigo → codigo", EDGE_INTERNAL,
-                            id_pvi, id_prod, parent=id_sw_bling))
+    cells.append(edge_cell(new_id(),
+                            "pvi.codigo\n= produtos.codigo\n⚠️ 510 SKUs faltantes",
+                            EDGE_INTERNAL, id_pvi, id_prod, parent=id_sw_bling))
     # pedidos_vendas → contato
-    cells.append(edge_cell(new_id(), "contato_id →", EDGE_INTERNAL,
-                            id_pv, id_contato, parent=id_sw_bling))
+    cells.append(edge_cell(new_id(),
+                            "pv.contato_id\n→ contato.identificador\n🔴 0% join (schema mismatch)",
+                            EDGE_INTERNAL, id_pv, id_contato, parent=id_sw_bling))
     # pedidos_vendas → notas_fiscais
-    cells.append(edge_cell(new_id(), "nota_fiscal_id →", EDGE_INTERNAL,
-                            id_pv, id_nf, parent=id_sw_bling))
+    cells.append(edge_cell(new_id(),
+                            "pv.nota_fiscal_id\n= nf.identificador\n✓ 99.99%",
+                            EDGE_INTERNAL, id_pv, id_nf, parent=id_sw_bling))
 
     # ─── BRIDGE EDGES (entre swimlanes — usam parent="1") ────────────────────
     # GA4 purchase → pedidos_vendas  [MÉDIA 20.5%]
     cells.append(edge_cell(new_id(),
-                            "transactionId = numero\n[MÉDIA · 20.5% cobertura]",
+                            "GA4.event_params[transaction_id]\n= pedidos_vendas.numero\n⚠️ MÉDIA · 20.5% cobertura",
                             EDGE_BRIDGE_MED, id_ga4, id_pv))
 
     # nuvemshop_pedidos → pedidos_vendas  [ALTA]
     cells.append(edge_cell(new_id(),
-                            "store_id = loja_id\n[ALTA ✓ · R$ 2.85M confirmado]",
+                            "nuvemshop_pedidos.store_id\n= pedidos_vendas.loja_id\n✓ ALTA · R$ 2.85M",
                             EDGE_BRIDGE_HIGH, id_ns_ped, id_pv))
 
     # perfit_actions → contato  [ALTA 75%]
     cells.append(edge_cell(new_id(),
-                            "contact_email = email\n[ALTA · 75% · 4.994 clientes]",
+                            "perfit.contact_email\n= contato.email\n✓ ALTA · 75% · 4.994 clientes",
                             EDGE_BRIDGE_HIGH, id_perfit, id_contato))
 
     # dispatch_send_log → contato  [ALTA 100% FK]
     cells.append(edge_cell(new_id(),
-                            "contact_id = identificador\n[ALTA · 100% · FK direta]",
+                            "dispatch_send_log.contact_id\n= contato.identificador\n✓ ALTA · 100% · FK direta",
                             EDGE_BRIDGE_HIGH, id_dispatch, id_contato))
 
-    # checkout.contact_email → contato  [MÉDIA]
+    # checkout → nuvemshop via email/CPF [ALTA]
     cells.append(edge_cell(new_id(),
-                            "contact_email = email\n[MÉDIA · bridge potencial]",
-                            EDGE_BRIDGE_MED, id_checkout, id_contato))
+                            "checkout.contact_email\n= contato.email\n✓ ALTA · 64.7% fill",
+                            EDGE_BRIDGE_HIGH, id_checkout, id_contato))
+
+    # checkout → nuvemshop token [MÉDIA]
+    cells.append(edge_cell(new_id(),
+                            "checkout.token\n= nuvemshop_pedidos.token\n⚠️ MÉDIA · 12.5% converte",
+                            EDGE_BRIDGE_MED, id_ga4, id_ns_ped))
 
     # ─── LEGEND ──────────────────────────────────────────────────────────────
     legend_style = (
@@ -423,19 +432,20 @@ def build_diagram() -> str:
 
 def generate_xml(cells: list) -> str:
     body = "".join(cells)
-    return textwrap.dedent(f"""\
-        <?xml version="1.0" encoding="UTF-8"?>
-        <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1"
-          tooltips="1" connect="1" arrows="1" fold="1" page="0"
-          pageScale="1" pageWidth="1654" pageHeight="1169"
-          math="0" shadow="0" background="#0f1117">
-          <root>
-            <mxCell id="0"/>
-            <mxCell id="1" parent="0"/>
-        {body}
-          </root>
-        </mxGraphModel>
-    """)
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1"',
+        '  tooltips="1" connect="1" arrows="1" fold="1" page="0"',
+        '  pageScale="1" pageWidth="1654" pageHeight="1169"',
+        '  math="0" shadow="0" background="#0f1117">',
+        '  <root>',
+        '    <mxCell id="0"/>',
+        '    <mxCell id="1" parent="0"/>',
+        body,
+        '  </root>',
+        '</mxGraphModel>',
+    ]
+    return "\n".join(lines)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
