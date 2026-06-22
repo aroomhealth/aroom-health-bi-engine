@@ -1,0 +1,114 @@
+flowchart TD
+
+    subgraph ADS["🎯 AQUISIÇÃO — Paid Media"]
+        GADS["Google Ads\ncampaign_name\ncampaign_id\ncost_micros"]
+        META["Meta / Instagram Ads\ncampaign_id\nspend\nimpressoes"]
+        SHOPADS["Shopee / ML / TikTok Ads\nspend por canal"]
+    end
+
+    subgraph FRONT["🌐 LAYER 1 — FRONTEND (GA4 + Comportamento)"]
+        GA4N["GA4 events_YYYYMMDD\nevent_name\nuser_pseudo_id ← cookie\ntraffic_source.source\ntraffic_source.medium\ntraffic_source.name\nevent_params[transaction_id]"]
+        FUNNEL["Funil de Eventos\npage_view\nview_item_list → view_item\nadd_to_cart\nbegin_checkout\nadd_shipping_info\nadd_payment_info\nPURCHASE ✓"]
+        GA4AGG["GA4 Agregado pipeline\ngoogle_analytics_daily\ngoogle_analytics_utm_daily\ngoogle_analytics_revenue_channel_daily"]
+    end
+
+    subgraph BACK["🛒 LAYER 2 — BACKEND (Nuvemshop + Checkout)"]
+        CHK["checkout\ntoken ← ID único do carrinho\ncontact_email ← 100% fill\ncontact_identification CPF\nstore_id = 2537710\ncreated_at"]
+        CHKP["checkout_products\nsku · qty · price\n7.193 itens"]
+        CHKPAY["checkout_payment_details\npayment_method\n2.568 registros"]
+        CHKCPN["checkout_coupon\ncoupon_code\n975 cupons"]
+        NS["nuvemshop_pedidos\ntoken ← bridge checkout\ncustomer_id ← ID Nuvemshop\ncontact_email ← 100%\ncontact_identification CPF\nstore_id\npayment_status paid=93.6%\n19.915 pedidos"]
+        NSP["nuvemshop_pedido_produto\nsku · qty · price\n48.690 itens"]
+    end
+
+    subgraph BLING["🏦 LAYER 3 — BLING ERP (Fonte de Verdade)"]
+        PV["pedidos_vendas\nidentificador PK\nnumero ← transactionId GA4\nloja_id ← canal\ncontato_id ← cliente\nnota_fiscal_id\ntotal\n130.135 pedidos\nR$ 9.538.019"]
+        PVI["pedidos_vendas_itens\npedidos_vendas_identificador FK\ncodigo ← SKU\nquantidade · valor\n187.875 itens"]
+        PROD["produtos\nidentificador PK\ncodigo SKU 48.3% preenchido\nnome · preco\nsituacao A=1730 ativos\n9.751 total\n⚠️ 510 SKUs faltantes"]
+        CONT["contato\nidentificador PK INT64\nemail 64.7% fill\nnumero_documento CPF 95%\ntelefone 33.8%\n120.479 clientes"]
+        NF["notas_fiscais_saida\nnumero NF\ndata_emissao\nchave_acesso 44 dig\n73.286 NFs\n56.3% dos pedidos"]
+        CANAIS["bling_canais_venda\nid_canal PK\ncanal_edit\n76 canais mapeados"]
+        ESTOQUE["bling_estoque_saldos\nproduto_identificador\nsaldo_fisico\n44.117 saldos"]
+    end
+
+    subgraph CI["🧠 CUSTOMER INTELLIGENCE"]
+        C360["customer_intelligence\ncustomer_360\ncustomer_rfm\ncustomer_clusters\ncustomer_predictions\ncustomer_activation"]
+        VIEWS["Growth Engine Views\ngrowth_engine_vendas_detalhado\ngrowth_engine_crm_rfm\ngrowth_engine_churn_risco\ngrowth_engine_aquisicao\ngrowth_engine_marketing_roas"]
+        ML_DS["ml.customer_segments\nfeatures.customer_features\nwallet_for_marketing.customer_wallet_snapshot"]
+    end
+
+    subgraph CRM["📧 EMAIL CRM — Perfit + Dispatch"]
+        PERFIT["perfit_campaign_actions\ncampaign_id\naction_type SENT·OPEN·CLICK\ncontact_email ← bridge\n297.434 eventos"]
+        PERFITM["perfit_campaign_metrics\ncampaign_id\nopen_rate · ctr · ctor\nconversion_rate\n758 snapshots"]
+        DISP["dispatch_send_log\ncontact_id ← FK Bling\nrule_tag automacao\naniversario·sinto_falta\n22.376 envios"]
+    end
+
+    %% ── ADS → FRONTEND ──
+    GADS -->|"UTM: utm_source=google\nutm_medium=cpc\nutm_campaign=pmax_roas_*"| GA4N
+    META -->|"UTM: ig/paid\ncampaign_id numérico"| GA4N
+    SHOPADS -->|"canal direto"| GA4N
+
+    %% ── FRONTEND interno ──
+    GA4N --> FUNNEL
+    GA4N --> GA4AGG
+    FUNNEL -->|"purchase event\ncontém transaction_id"| GA4N
+
+    %% ── FRONTEND → BACKEND ──
+    GA4N -->|"session_start\nantes do checkout"| CHK
+
+    %% ── BACKEND interno ──
+    CHK --> CHKP
+    CHK --> CHKPAY
+    CHK --> CHKCPN
+    CHK -->|"token 12.5% converte\n87.5% abandona"| NS
+    NS --> NSP
+
+    %% ── BACKEND → BLING ──
+    NS -->|"store_id = loja_id\n🟢 ALTA · R$ 2.85M\n23.841 pedidos"| PV
+
+    %% ── GA4 → BLING (bridge direta) ──
+    GA4N -->|"transaction_id = numero\n🟡 MÉDIA · 20.5% cobertura\n4.955 transações / R$ 512k"| PV
+
+    %% ── BLING interno ──
+    PV --> PVI
+    PVI -->|"codigo = codigo\n⚠️ 510 SKUs faltantes"| PROD
+    PV -->|"contato_id ≠ identificador\n🔴 SCHEMA MISMATCH\n0% join direto"| CONT
+    PV -->|"nota_fiscal_id\n99.99% cobertura"| NF
+    PV -->|"loja_id = id_canal"| CANAIS
+    PROD --> ESTOQUE
+
+    %% ── BLING → CUSTOMER INTELLIGENCE ──
+    PV --> C360
+    PVI --> C360
+    CONT --> C360
+    C360 --> VIEWS
+    C360 --> ML_DS
+
+    %% ── BLING → CRM ──
+    CONT -->|"email 64.7% fill\n→ Perfit lista"| PERFIT
+    CONT -->|"contact_id FK\n🟢 100% confiável"| DISP
+
+    %% ── CRM → BigQuery ──
+    PERFIT --> PERFITM
+    DISP -->|"automações disparam\naniversario · recompra"| CONT
+
+    %% ── GOOGLE ADS → ATTRIBUTION ──
+    GADS -->|"campaign_name_mapping\n54 mapeamentos\nde-para UTM→Ads"| GA4AGG
+
+    %% ── ESTILOS ──
+    classDef ads fill:#92400e,stroke:#f59e0b,color:#fff,font-size:10px
+    classDef front fill:#1e3a5f,stroke:#3b82f6,color:#fff,font-size:10px
+    classDef back fill:#0f3a3a,stroke:#14b8a6,color:#fff,font-size:10px
+    classDef bling fill:#14532d,stroke:#22c55e,color:#fff,font-size:10px
+    classDef ci fill:#3b0764,stroke:#a855f7,color:#fff,font-size:10px
+    classDef crm fill:#4c1d95,stroke:#8b5cf6,color:#fff,font-size:10px
+    classDef warn fill:#7c2d12,stroke:#f97316,color:#fff,font-size:10px
+
+    class GADS,META,SHOPADS ads
+    class GA4N,FUNNEL,GA4AGG front
+    class CHK,CHKP,CHKPAY,CHKCPN,NS,NSP back
+    class PV,PVI,NF,CANAIS,ESTOQUE bling
+    class PROD warn
+    class CONT bling
+    class C360,VIEWS,ML_DS ci
+    class PERFIT,PERFITM,DISP crm
