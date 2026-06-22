@@ -113,7 +113,7 @@ base_limpa AS (
         END as origem_agrupada,
 
         -- Produto e Categoria (Join apenas como dicionário/DePara)
-        prod.nome as produto,
+        COALESCE(prod.nome, i.descricao) as produto,
         CASE 
             WHEN prod.situacao = 'A' THEN 'Sim'
             ELSE 'Não'
@@ -123,12 +123,12 @@ base_limpa AS (
         CASE
             WHEN (cat.categoria_produto IS NULL OR cat.categoria_produto = 'Outros' OR cat.categoria_produto = '') THEN
                 CASE
-                    WHEN LOWER(prod.nome) LIKE '%óleo vegetal%' OR LOWER(prod.nome) LIKE '%oleo vegetal%' OR LOWER(prod.nome) LIKE '%semente de uva%' OR LOWER(prod.nome) LIKE '%rícino%' OR LOWER(prod.nome) LIKE '%ricino%' OR LOWER(prod.nome) LIKE '%jojoba%' THEN 'Óleos Vegetais'
-                    WHEN LOWER(prod.nome) LIKE '%tintura%' OR LOWER(prod.nome) LIKE '%maca peruana%' THEN 'Tintura Mãe'
-                    WHEN LOWER(prod.nome) LIKE '%blend%' THEN 'Blends Fórmulas Exclusivas'
-                    WHEN LOWER(prod.nome) LIKE '%kit%' THEN 'Kits De Óleos Vegetais'
-                    WHEN LOWER(prod.nome) LIKE '%óleo essencial%' OR LOWER(prod.nome) LIKE '%oleo essencial%' THEN 'Óleos Essenciais'
-                    WHEN LOWER(prod.nome) LIKE '%argila%' THEN 'Argila'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%óleo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%oleo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%semente de uva%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%rícino%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%ricino%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%jojoba%' THEN 'Óleos Vegetais'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%tintura%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%maca peruana%' THEN 'Tintura Mãe'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%blend%' THEN 'Blends Fórmulas Exclusivas'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%kit%' THEN 'Kits De Óleos Vegetais'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%óleo essencial%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%oleo essencial%' THEN 'Óleos Essenciais'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%argila%' THEN 'Argila'
                     ELSE COALESCE(cat.categoria_produto, 'Sem Categoria')
                 END
             ELSE cat.categoria_produto
@@ -137,12 +137,12 @@ base_limpa AS (
         CASE
             WHEN (cat.subcategoria_produto IS NULL OR cat.subcategoria_produto = 'Outros' OR cat.subcategoria_produto = '') THEN
                 CASE
-                    WHEN LOWER(prod.nome) LIKE '%óleo vegetal%' OR LOWER(prod.nome) LIKE '%oleo vegetal%' OR LOWER(prod.nome) LIKE '%semente de uva%' OR LOWER(prod.nome) LIKE '%rícino%' OR LOWER(prod.nome) LIKE '%ricino%' OR LOWER(prod.nome) LIKE '%jojoba%' THEN 'Óleos Vegetais'
-                    WHEN LOWER(prod.nome) LIKE '%tintura%' OR LOWER(prod.nome) LIKE '%maca peruana%' THEN 'Tintura Mãe'
-                    WHEN LOWER(prod.nome) LIKE '%blend%' THEN 'Blends Fórmulas Exclusivas'
-                    WHEN LOWER(prod.nome) LIKE '%kit%' THEN 'Kits De Óleos Vegetais'
-                    WHEN LOWER(prod.nome) LIKE '%óleo essencial%' OR LOWER(prod.nome) LIKE '%oleo essencial%' THEN 'Óleos Essenciais'
-                    WHEN LOWER(prod.nome) LIKE '%argila%' THEN 'Argila'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%óleo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%oleo vegetal%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%semente de uva%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%rícino%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%ricino%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%jojoba%' THEN 'Óleos Vegetais'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%tintura%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%maca peruana%' THEN 'Tintura Mãe'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%blend%' THEN 'Blends Fórmulas Exclusivas'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%kit%' THEN 'Kits De Óleos Vegetais'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%óleo essencial%' OR LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%oleo essencial%' THEN 'Óleos Essenciais'
+                    WHEN LOWER(COALESCE(prod.nome, i.descricao)) LIKE '%argila%' THEN 'Argila'
                     ELSE COALESCE(cat.subcategoria_produto, 'Sem Categoria')
                 END
             ELSE cat.subcategoria_produto
