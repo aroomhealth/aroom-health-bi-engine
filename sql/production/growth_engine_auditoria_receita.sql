@@ -15,8 +15,9 @@ WITH old_sales AS (
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(Canal_Venda, '')), r'shopee') THEN 'Shopee'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(Canal_Venda, '')), r'amazon') THEN 'Amazon'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(Canal_Venda, '')), r'b2b|atacado|revenda') THEN 'B2B / Atacado'
+            WHEN REGEXP_CONTAINS(LOWER(COALESCE(Canal_Venda, '')), r'giuliana|trecos|trivo|varie|facilzap|dropify') THEN 'Parceiros / B2B'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(Canal_Venda, '')), r'loja física|venda direta') THEN 'Loja Física / Venda Direta'
-            ELSE 'Outros' 
+            ELSE 'Tiktok' 
         END as canal,
         nome_produto as produto,
         SUM(valor) as receita_bruta_antiga,
@@ -26,7 +27,7 @@ WITH old_sales AS (
     WHERE situacao_id NOT IN (12, 105)
     GROUP BY 1, 2, 3
 ),
-new_sales AS (
+    new_sales AS (
     SELECT 
         data_venda,
         origem_agrupada as canal,
@@ -41,6 +42,9 @@ new_sales AS (
         ANY_VALUE(subcategoria_produto) as subcategoria_produto,
         SUM(receita_liquida) as receita_liquida_nova,
         SUM(receita_bruta) as receita_bruta_nova,
+        SUM(lucro_bruto) as lucro_bruto_novo,
+        SUM(custo_marketing_rateado) as custo_marketing_rateado,
+        SUM(margem_liquida_final) as margem_liquida_nova,
         SUM(quantidade_comprada) as qtd_nova
     FROM `iron-rex-461220-g4.customer_intelligence.growth_engine_vendas_detalhado`
     GROUP BY 1, 2, 3
@@ -68,6 +72,9 @@ SELECT
     
     IFNULL(o.receita_liquida_antiga, 0) as receita_liquida,
     IFNULL(n.receita_liquida_nova, 0) as receita_liquida_nova,
+    IFNULL(n.lucro_bruto_novo, 0) as lucro_bruto_novo,
+    IFNULL(n.custo_marketing_rateado, 0) as custo_marketing_rateado,
+    IFNULL(n.margem_liquida_nova, 0) as margem_liquida_nova,
     
     -- Cálculos de Diferença (Deltas)
     (IFNULL(n.receita_bruta_nova, 0) - IFNULL(o.receita_bruta_antiga, 0)) as diferenca_bruta,

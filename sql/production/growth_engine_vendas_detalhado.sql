@@ -54,11 +54,15 @@ forma_pagto AS (
     GROUP BY 1
 ),
 ads_raw AS (
-    SELECT DATE(segments_date) as data_referencia, CAST(SUM(metrics_cost_micros/1000000) AS FLOAT64) as investimento FROM `iron-rex-461220-g4.google_ads.ads_CampaignStats_5644422842` GROUP BY 1
+    SELECT day as data_referencia, CAST(cost_spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.google_ads_campaign_performance`
     UNION ALL
     SELECT date as data_referencia, CAST(spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.facebook_ads_insights`
     UNION ALL
     SELECT date as data_referencia, CAST(spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.tiktok_ads_insights`
+    UNION ALL
+    SELECT date as data_referencia, CAST(spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.shopee_ads_insights`
+    UNION ALL
+    SELECT date as data_referencia, CAST(spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.mercadolivre_ads_insights`
 ),
 marketing_diario AS (
     SELECT 
@@ -106,10 +110,11 @@ base_limpa AS (
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'netshoes|zattini') THEN 'Netshoes / Zattini'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'b2w|via(\s)?varejo|madeira') THEN 'Outros Marketplaces'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'azul|latam') THEN 'Programas de Pontos'
-            WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'giuliana|trecos|trivo|varie|facilzap|dropify|atacado|revenda') THEN 'Parceiros / B2B'
+            WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'b2b|atacado|revenda') THEN 'B2B / Atacado'
+            WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'giuliana|trecos|trivo|varie|facilzap|dropify') THEN 'Parceiros / B2B'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'site|magento|loja aroom') THEN 'Site Próprio (E-commerce)'
             WHEN COALESCE(c.canal_edit, c.canal) IS NULL OR COALESCE(c.canal_edit, c.canal) = '' THEN 'Loja Física / Venda Direta'
-            ELSE 'Outros'
+            ELSE 'Tiktok'
         END as origem_agrupada,
 
         -- Produto e Categoria (Join apenas como dicionário/DePara)

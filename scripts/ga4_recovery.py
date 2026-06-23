@@ -140,6 +140,10 @@ def main():
         "ga4_recovery_ecommerce": {
             "dimensions": ["date", "sessionSource", "sessionMedium", "transactionId"],
             "metrics": ["purchaseRevenue"]
+        },
+        "ga4_recovery_costs": {
+            "dimensions": ["date", "sessionCampaignName", "sessionSource", "sessionMedium"],
+            "metrics": ["advertiserAdCost", "advertiserAdClicks", "advertiserAdImpressions"]
         }
     }
 

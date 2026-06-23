@@ -74,10 +74,11 @@ base_limpa AS (
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'netshoes|zattini') THEN 'Netshoes / Zattini'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'b2w|via(\s)?varejo|madeira') THEN 'Outros Marketplaces'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'azul|latam') THEN 'Programas de Pontos'
-            WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'giuliana|trecos|trivo|varie|facilzap|dropify|atacado|revenda') THEN 'Parceiros / B2B'
+            WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'b2b|atacado|revenda') THEN 'B2B / Atacado'
+            WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'giuliana|trecos|trivo|varie|facilzap|dropify') THEN 'Parceiros / B2B'
             WHEN REGEXP_CONTAINS(LOWER(COALESCE(c.canal_edit, c.canal, '')), r'site|magento|loja aroom') THEN 'Site Próprio (E-commerce)'
             WHEN COALESCE(c.canal_edit, c.canal) IS NULL OR COALESCE(c.canal_edit, c.canal) = '' THEN 'Loja Física / Venda Direta'
-            ELSE 'Outros'
+            ELSE 'Tiktok'
         END as origem_agrupada,
 
         -- Produto e Categoria (Join apenas como dicionário/DePara)
