@@ -88,6 +88,7 @@ def main():
     parser.add_argument("--property", default=DEFAULT_PROPERTY_ID, help="ID da Propriedade do GA4")
     parser.add_argument("--start-date", default="2025-12-11", help="Data de início (YYYY-MM-DD)")
     parser.add_argument("--end-date", default="2026-06-10", help="Data de término (YYYY-MM-DD)")
+    parser.add_argument("--reports", help="Lista de relatórios para extrair, separados por vírgula (ex: ga4_recovery_costs)")
     
     args = parser.parse_args()
     
@@ -115,8 +116,8 @@ def main():
         bq_client.create_dataset(dataset)
         print(f"Dataset {DATASET_ID} criado com sucesso na região us-central1.")
 
-    # Definição dos relatórios a serem extraídos
-    reports_config = {
+    # Definição de todos os relatórios disponíveis
+    all_reports = {
         "ga4_recovery_traffic_sources": {
             "dimensions": ["date", "sessionSource", "sessionMedium", "sessionCampaignName"],
             "metrics": ["activeUsers", "sessions", "conversions", "eventCount", "purchaseRevenue"]
@@ -146,6 +147,14 @@ def main():
             "metrics": ["advertiserAdCost", "advertiserAdClicks", "advertiserAdImpressions"]
         }
     }
+
+    if args.reports:
+        selected_reports = [r.strip() for r in args.reports.split(",")]
+        reports_config = {k: v for k, v in all_reports.items() if k in selected_reports}
+        print(f"Relatórios selecionados para extração: {list(reports_config.keys())}")
+    else:
+        reports_config = all_reports
+        print(f"Executando todos os relatórios disponíveis: {list(reports_config.keys())}")
 
     # Range de datas divididos em chunks de no máximo 30 dias
     start = datetime.strptime(args.start_date, "%Y-%m-%d")

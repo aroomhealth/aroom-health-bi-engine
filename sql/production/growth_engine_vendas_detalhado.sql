@@ -54,7 +54,34 @@ forma_pagto AS (
     GROUP BY 1
 ),
 ads_raw AS (
-    SELECT day as data_referencia, CAST(cost_spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.google_ads_campaign_performance`
+    -- Google Ads: Unificação do Legado (<2025-01-01), DTS (>=2025-01-01) e GA4 Recovery (fallback)
+    SELECT 
+        day as data_referencia, 
+        CAST(cost_spend AS FLOAT64) as investimento 
+    FROM `iron-rex-461220-g4.database_aroom_health.google_ads_campaign_performance`
+    WHERE day < '2025-01-01'
+    
+    UNION ALL
+    
+    SELECT 
+        COALESCE(dts.segments_date, ga4.date) as data_referencia,
+        COALESCE(CAST(dts.investimento AS FLOAT64), ga4.investimento) as investimento
+    FROM (
+        SELECT 
+            segments_date, 
+            SUM(metrics_cost_micros/1000000) as investimento 
+        FROM `iron-rex-461220-g4.google_ads.ads_CampaignStats_5644422842`
+        GROUP BY 1
+    ) dts
+    FULL OUTER JOIN (
+        SELECT 
+            date, 
+            SUM(advertiserAdCost) as investimento 
+        FROM `iron-rex-461220-g4.analytics_recovery.ga4_recovery_costs`
+        GROUP BY 1
+    ) ga4 ON dts.segments_date = ga4.date
+    WHERE COALESCE(dts.segments_date, ga4.date) >= '2025-01-01'
+    
     UNION ALL
     SELECT date as data_referencia, CAST(spend AS FLOAT64) as investimento FROM `iron-rex-461220-g4.database_aroom_health.facebook_ads_insights`
     UNION ALL

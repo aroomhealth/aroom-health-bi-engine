@@ -6,14 +6,41 @@ WITH ga4_daily AS (
     GROUP BY 1
 ),
 ads_raw AS (
-    -- Google Ads
+    -- Google Ads Consolidado (Legado < 2025-01-01 + DTS >= 2025-01-01 + GA4 Recovery Fallback)
     SELECT 
-        DATE(segments_date) as data_referencia,
-        CAST(SUM(metrics_cost_micros/1000000) AS FLOAT64) as investimento,
-        SUM(metrics_clicks) as cliques,
-        SUM(metrics_impressions) as impressoes
-    FROM `iron-rex-461220-g4.google_ads.ads_CampaignStats_5644422842`
-    GROUP BY 1
+        day as data_referencia,
+        CAST(cost_spend AS FLOAT64) as investimento,
+        clicks as cliques,
+        impressions as impressoes
+    FROM `iron-rex-461220-g4.database_aroom_health.google_ads_campaign_performance`
+    WHERE day < '2025-01-01'
+    
+    UNION ALL
+    
+    SELECT 
+        COALESCE(dts.segments_date, ga4.date) as data_referencia,
+        COALESCE(CAST(dts.investimento AS FLOAT64), ga4.investimento) as investimento,
+        COALESCE(dts.cliques, ga4.cliques) as cliques,
+        COALESCE(dts.impressoes, ga4.impressoes) as impressoes
+    FROM (
+        SELECT 
+            segments_date, 
+            SUM(metrics_cost_micros/1000000) as investimento,
+            SUM(metrics_clicks) as cliques,
+            SUM(metrics_impressions) as impressoes
+        FROM `iron-rex-461220-g4.google_ads.ads_CampaignStats_5644422842`
+        GROUP BY 1
+    ) dts
+    FULL OUTER JOIN (
+        SELECT 
+            date, 
+            SUM(advertiserAdCost) as investimento,
+            SUM(advertiserAdClicks) as cliques,
+            SUM(advertiserAdImpressions) as impressoes
+        FROM `iron-rex-461220-g4.analytics_recovery.ga4_recovery_costs`
+        GROUP BY 1
+    ) ga4 ON dts.segments_date = ga4.date
+    WHERE COALESCE(dts.segments_date, ga4.date) >= '2025-01-01'
     
     UNION ALL
     

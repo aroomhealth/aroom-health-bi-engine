@@ -119,3 +119,30 @@ SELECT
     ROUND(ga.value_conv, 2)
 FROM `iron-rex-461220-g4.database_aroom_health.google_ads_campaign_performance` ga
 WHERE ga.cost_spend > 0
+  AND ga.day < '2025-01-01'
+
+UNION ALL
+
+-- Google Ads (DTS)
+SELECT
+    'Google Ads (DTS)'                      AS canal,
+    cs.segments_date                        AS data,
+    CAST(cs.campaign_id AS STRING)          AS campaign_id,
+    COALESCE(cam.campaign_name, 'Desconhecida') AS campanha,
+    CAST(NULL AS STRING)                    AS conjunto_anuncio,
+    ROUND(SUM(cs.metrics_cost_micros) / 1000000, 2) AS investimento,
+    SUM(cs.metrics_impressions)             AS impressions,
+    SUM(cs.metrics_clicks)                  AS clicks,
+    ROUND(SAFE_DIVIDE(SUM(cs.metrics_clicks), NULLIF(SUM(cs.metrics_impressions), 0)) * 100, 2) AS ctr_pct,
+    ROUND(SAFE_DIVIDE(SUM(cs.metrics_cost_micros) / 1000000, NULLIF(SUM(cs.metrics_clicks), 0)), 4) AS cpc_calculado,
+    SUM(cs.metrics_conversions_value)       AS conversoes_valor,
+    ROUND(SAFE_DIVIDE(SUM(cs.metrics_conversions_value), NULLIF(SUM(cs.metrics_cost_micros) / 1000000, 0)), 2) AS roas
+FROM `iron-rex-461220-g4.google_ads.ads_CampaignStats_5644422842` cs
+LEFT JOIN (
+    SELECT DISTINCT campaign_id, ANY_VALUE(campaign_name) AS campaign_name
+    FROM `iron-rex-461220-g4.google_ads.ads_Campaign_5644422842`
+    GROUP BY campaign_id
+) cam ON cs.campaign_id = cam.campaign_id
+WHERE cs.segments_date >= '2025-01-01'
+GROUP BY cs.segments_date, cs.campaign_id, cam.campaign_name
+HAVING investimento > 0
